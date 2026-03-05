@@ -1,37 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<title>Skillfeed Login</title>
-<link rel="stylesheet" href="style.css">
-
+  <title>Skillfeed | Login</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+  <div class="phone">
+    <div class="topbar">
+      <div class="brand">Skillfeed</div>
+      <div class="sub">Build startups with the right people.</div>
+    </div>
 
-<div class="container">
+    <div class="main">
+      <div class="h1">Login</div>
+      <div class="card grid">
+        <input id="email" placeholder="Email" type="email">
+        <input id="password" placeholder="Password" type="password">
+        <button class="btn" id="loginBtn">Login</button>
+        <button class="btn secondary" onclick="window.location.href='/register.html'">Create new account</button>
+        <div class="status" id="status"></div>
+      </div>
+    </div>
 
-<h1>Skillfeed</h1>
-<p>Build startups with the right people</p>
+    <div class="footer">Developed by Kshiprant</div>
+  </div>
 
-<input id="email" placeholder="Email">
-<input id="password" type="password" placeholder="Password">
-
-<button onclick="login()">Login</button>
-
-<p>
-Don't have an account?
-<a href="/register.html">Register
-</a>
-</p>
-
-</div>
-
-<footer>
-Developed by Kshiprant
-</footer>
-
-<script type="module" src="auth.js"></script>
-
+  <script type="module" src="login.js?v=1"></script>
 </body>
 </html>
