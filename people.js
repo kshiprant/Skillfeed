@@ -1,105 +1,43 @@
-import { auth, db } from "./firebase.js";
+import { db } from "./firebase.js";
+import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+const list = document.getElementById("list");
+const status = document.getElementById("status");
+const count = document.getElementById("count");
 
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+function setStatus(t){ status.textContent = t; }
 
-const peopleList = document.getElementById("peopleList");
-const searchInput = document.getElementById("searchInput");
-const searchBtn = document.getElementById("searchBtn");
-const clearBtn = document.getElementById("clearBtn");
+(async function loadPeople(){
+  setStatus("Loading people...");
+  try{
+    const q = query(collection(db, "users"), orderBy("updatedAt", "desc"));
+    const snap = await getDocs(q);
 
-let allUsers = [];
+    count.textContent = snap.size;
 
-function safeText(v) {
-  return (v ?? "").toString();
-}
+    if (snap.empty){
+      setStatus("No profiles yet. Create yours first.");
+      list.innerHTML = `<div class="card">No users found.</div>`;
+      return;
+    }
 
-function renderUsers(users) {
-  if (!peopleList) return;
+    setStatus("");
 
-  if (users.length === 0) {
-    peopleList.innerHTML = `
-      <div class="card">
-        <p>No profiles found. Try different search keywords.</p>
-      </div>
-    `;
-    return;
+    list.innerHTML = "";
+    snap.forEach(docu => {
+      const p = docu.data();
+      const div = document.createElement("div");
+      div.className = "person";
+      div.innerHTML = `
+        <h3>${p.name || "Unnamed"} <span class="badge">Lv ${p.level || "1"}</span></h3>
+        <p><b>Skills:</b> ${p.skills || "-"}</p>
+        <p><b>Location:</b> ${p.location || "-"}</p>
+        <p><b>Startup:</b> ${p.startup || "-"}</p>
+      `;
+      list.appendChild(div);
+    });
+  }catch(e){
+    console.error(e);
+    setStatus("❌ " + (e.message || e));
   }
-
-  peopleList.innerHTML = users.map(u => {
-    const name = safeText(u.name) || "Unnamed";
-    const skills = safeText(u.skills) || "-";
-    const location = safeText(u.location) || "-";
-    const startup = safeText(u.startup) || "-";
-    const bio = safeText(u.bio) || "-";
-    const level = safeText(u.level) || "-";
-
-    return `
-      <div class="card">
-        <h3>${name} <span style="font-size:12px; opacity:.8;">(Level ${level})</span></h3>
-        <p><b>Skills:</b> ${skills}</p>
-        <p><b>Location:</b> ${location}</p>
-        <p><b>Startup Interest:</b> ${startup}</p>
-        <p style="opacity:.9;"><b>Bio:</b> ${bio}</p>
-        <button onclick="connectTo('${name.replace(/'/g, "\\'")}')">Connect</button>
-      </div>
-    `;
-  }).join("");
-}
-
-// Placeholder connect action (we’ll make real connections next)
-window.connectTo = function(name){
-  alert("Connection request sent to " + name + " (demo)");
-};
-
-async function loadUsers() {
-  const snap = await getDocs(collection(db, "users"));
-  allUsers = [];
-  snap.forEach(doc => {
-    allUsers.push({ id: doc.id, ...doc.data() });
-  });
-  renderUsers(allUsers);
-}
-
-function applySearch() {
-  const q = (searchInput.value || "").trim().toLowerCase();
-  if (!q) {
-    renderUsers(allUsers);
-    return;
-  }
-
-  const filtered = allUsers.filter(u => {
-    const hay = [
-      u.name, u.skills, u.location, u.startup, u.bio, u.level
-    ].map(v => safeText(v).toLowerCase()).join(" ");
-    return hay.includes(q);
-  });
-
-  renderUsers(filtered);
-}
-
-if (searchBtn) searchBtn.addEventListener("click", applySearch);
-if (clearBtn) clearBtn.addEventListener("click", () => {
-  searchInput.value = "";
-  renderUsers(allUsers);
-});
-if (searchInput) searchInput.addEventListener("keyup", (e) => {
-  if (e.key === "Enter") applySearch();
-});
-
-// Auth guard: only logged-in users can view People page
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    window.location.href = "/";
-    return;
-  }
-  loadUsers().catch(err => {
-    console.error(err);
-    peopleList.innerHTML = `
-      <div class="card">
-        <p>Could not load profiles. Check Firestore rules / console logs.</p>
-      </div>
-    `;
-  });
-});
+})();
