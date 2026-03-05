@@ -193,37 +193,49 @@ textarea{ min-height: 90px; resize:none; }
   color: var(--muted);
   background: #fbfdff;
 }
-/* ===== Mobile dimension fix (keeps your theme/layout) ===== */
+/* ===== MOBILE FULL-WIDTH FIX ===== */
 
 .phone{
-  width: 100%;
+  width:100%;
 }
 
-/* Prevent sideways scroll on phone */
-body{
-  overflow-x: hidden;
-}
+/* On real phones → use full screen */
+@media (max-width:600px){
 
-/* Phone screens */
-@media (max-width: 600px){
-  .phone{
-    max-width: 100%;
-    margin: 0;
-    border: 0;
-    border-radius: 0;
-    box-shadow: none;
-    min-height: 100vh;
+  body{
+    padding:0;
   }
+
+  .phone{
+    max-width:100%;
+    width:100%;
+    margin:0;
+    border:0;
+    border-radius:0;
+    box-shadow:none;
+    min-height:100vh;
+  }
+
+  .main{
+    padding:20px;
+  }
+
+  .card{
+    width:100%;
+  }
+
 }
 
-/* Desktop / larger screens */
-@media (min-width: 601px){
+/* On desktop → keep phone preview frame */
+@media (min-width:601px){
+
   .phone{
-    max-width: 420px;
-    margin: 18px auto;
-    border: 1px solid var(--line);
-    border-radius: 26px;
-    box-shadow: var(--shadow);
-    min-height: calc(100vh - 36px);
+    max-width:420px;
+    margin:18px auto;
+    border:1px solid var(--line);
+    border-radius:26px;
+    box-shadow:var(--shadow);
+    min-height:calc(100vh - 36px);
   }
+
 }
