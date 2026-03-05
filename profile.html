@@ -1,36 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>Skillfeed | Profile</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skillfeed | Profile</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body data-protected="1">
-  <div class="phone">
-    <div class="topbar">
-      <div class="brand">Skillfeed</div>
-      <div class="sub">Your public profile.</div>
-    </div>
 
-    <div class="nav">
-      <a href="/home.html">Home</a>
-      <a href="/ideas.html">Ideas</a>
-      <a href="/people.html">Find People</a>
-      <a href="/messages.html">Messages</a>
-      <a class="active" href="/profile.html">Profile</a>
-      <a href="/create-profile.html">Create Profile</a>
-      <button onclick="logout()">Logout</button>
-    </div>
+<div class="phone">
 
-    <div class="main">
-      <div class="h1">Your Profile</div>
-      <div class="card" id="profileCard">Loading...</div>
-      <div class="status" id="status"></div>
-    </div>
-
-    <div class="footer">Developed by Kshiprant</div>
+  <div class="topbar">
+    <div class="brand">Skillfeed</div>
+    <div class="sub">Your public profile.</div>
   </div>
 
-  <script type="module" src="auth.js?v=1"></script>
-  <script type="module" src="profile-view.js?v=1"></script>
+  <div class="nav">
+    <a href="/home.html">Home</a>
+    <a href="/ideas.html">Ideas</a>
+    <a href="/people.html">Find People</a>
+    <a href="/messages.html">Messages</a>
+    <a class="active" href="/profile.html">Profile</a>
+    <a href="/create-profile.html">Create Profile</a>
+    <button type="button" onclick="logout()">Logout</button>
+  </div>
+
+  <div class="main">
+
+    <div class="h1">Your Profile</div>
+
+    <div class="card" id="profileCard">
+      Loading...
+    </div>
+
+    <div class="status" id="status"></div>
+
+  </div>
+
+  <div class="footer">
+    Developed by Kshiprant
+  </div>
+
+</div>
+
+<script type="module" src="auth.js?v=1"></script>
+<script type="module" src="profile-view.js?v=1"></script>
+
 </body>
 </html>
