@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
-<title>Skillfeed</title>
+<title>Skillfeed Login</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -16,14 +17,16 @@
 
 <p>Build startups with the right people</p>
 
-<input id="email" type="email" placeholder="Email">
+<input id="email" placeholder="Email">
 
 <input id="password" type="password" placeholder="Password">
 
-<button id="registerBtn">Register</button>
-<button id="loginBtn">Login</button>
+<button onclick="login()">Login</button>
 
-<p id="message"></p>
+<p>
+Don't have an account?
+<a href="register.html">Register here</a>
+</p>
 
 </div>
 
@@ -34,4 +37,5 @@ Developed by Kshiprant
 <script type="module" src="auth.js"></script>
 
 </body>
+
 </html>
