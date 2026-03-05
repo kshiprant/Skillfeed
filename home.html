@@ -1,67 +1,50 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
-<title>Skillfeed</title>
-
-<link rel="stylesheet" href="style.css">
-
+  <title>Skillfeed | Home</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+<body data-protected="1">
+  <div class="phone">
+    <div class="topbar">
+      <div class="brand">Skillfeed</div>
+      <div class="sub">Your startup collaboration hub.</div>
+    </div>
 
-<body>
+    <div class="nav">
+      <a class="active" href="/home.html">Home</a>
+      <a href="/ideas.html">Ideas</a>
+      <a href="/people.html">Find People</a>
+      <a href="/messages.html">Messages</a>
+      <a href="/profile.html">Profile</a>
+      <a href="/create-profile.html">Create Profile</a>
+      <button onclick="logout()">Logout</button>
+    </div>
 
-<header>
+    <div class="main">
+      <div class="card">
+        <div class="row">
+          <div>
+            <div class="h1">Welcome to Skillfeed</div>
+            <div class="small" style="text-align:left;">
+              Build startups with the right people. Create your profile to appear on Find People.
+            </div>
+          </div>
+          <span class="badge">Level system ready</span>
+        </div>
 
-<h1>Skillfeed</h1>
+        <div class="hr"></div>
 
-<nav>
+        <div class="grid">
+          <button class="btn" onclick="window.location.href='/create-profile.html'">Create / Update Profile</button>
+          <button class="btn secondary" onclick="window.location.href='/people.html'">Explore People</button>
+        </div>
+      </div>
+    </div>
 
-<a href="/home.html">Home</a>
-<a href="/ideas.html">Ideas</a>
-<a href="/people.html">Find People</a>
-<a href="/messages.html">Messages</a>
-<a href="/profile.html">Profile</a>
-  <a href="/create-profile.html">Create Profile</a>
+    <div class="footer">Developed by Kshiprant</div>
+  </div>
 
-<button onclick="logout()">Logout</button>
-
-</nav>
-
-</header>
-
-<div class="main">
-
-<h2>Startup Ideas</h2>
-
-<div class="card">
-
-<h3>AI Fitness Coach</h3>
-
-<p>Looking for a mobile developer and UI designer.</p>
-
-<button>Join Project</button>
-
-</div>
-
-<div class="card">
-
-<h3>Local Service Marketplace</h3>
-
-<p>Need backend developer and marketing partner.</p>
-
-<button>Join Project</button>
-
-</div>
-
-</div>
-
-<footer>
-Developed by Kshiprant
-</footer>
-
-<script type="module" src="auth.js"></script>
-
+  <script type="module" src="auth.js?v=1"></script>
 </body>
-
 </html>
