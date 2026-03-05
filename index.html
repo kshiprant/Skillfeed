@@ -1,39 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Skillfeed | Login</title>
-  <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Skillfeed | Login</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
-  <div class="phone">
-    <div class="topbar">
-      <div class="brand">Skillfeed</div>
-      <div class="sub">Build startups with the right people.</div>
-    </div>
 
-    <div class="main">
-      <div class="h1">Login</div>
+<div class="phone">
 
-      <div class="card grid">
-        <input id="email" placeholder="Email" type="email" autocomplete="email">
-        <input id="password" placeholder="Password" type="password" autocomplete="current-password">
-
-        <button class="btn" id="loginBtn" type="button">Login</button>
-
-        <button class="btn secondary" type="button" onclick="window.location.href='/register.html'">
-          Create new account
-        </button>
-
-        <div class="status" id="status"></div>
-      </div>
-    </div>
-
-    <div class="footer">Developed by Kshiprant</div>
+  <div class="topbar">
+    <div class="brand">Skillfeed</div>
+    <div class="sub">Build startups with the right people.</div>
   </div>
 
-  <script type="module" src="login.js?v=1"></script>
+  <div class="main">
+
+    <div class="h1">Login</div>
+
+    <div class="card grid">
+
+      <input id="email" placeholder="Email" type="email" autocomplete="email">
+
+      <input id="password" placeholder="Password" type="password" autocomplete="current-password">
+
+      <button class="btn" id="loginBtn" type="button">
+        Login
+      </button>
+
+      <button class="btn secondary" type="button"
+        onclick="window.location.href='/register.html'">
+        Create new account
+      </button>
+
+      <div class="status" id="status"></div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    Developed by Kshiprant
+  </div>
+
+</div>
+
+<script type="module" src="login.js?v=1"></script>
+
 </body>
 </html>
