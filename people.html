@@ -1,40 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Skillfeed | Find People</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body data-protected="1">
-  <div class="phone">
-    <div class="topbar">
-      <div class="brand">Skillfeed</div>
-      <div class="sub">Discover builders nearby (and worldwide).</div>
-    </div>
 
-    <div class="nav">
-      <a href="/home.html">Home</a>
-      <a href="/ideas.html">Ideas</a>
-      <a class="active" href="/people.html">Find People</a>
-      <a href="/messages.html">Messages</a>
-      <a href="/profile.html">Profile</a>
-      <a href="/create-profile.html">Create Profile</a>
-      <button onclick="logout()">Logout</button>
-    </div>
+<div class="phone">
 
-    <div class="main">
-      <div class="row">
-        <div class="h1" style="margin:0;">People</div>
-        <span class="badge" id="count">0</span>
-      </div>
-
-      <div class="status" id="status"></div>
-      <div class="list" id="list"></div>
-    </div>
-
-    <div class="footer">Developed by Kshiprant</div>
+  <div class="topbar">
+    <div class="brand">Skillfeed</div>
+    <div class="sub">Discover builders nearby (and worldwide).</div>
   </div>
 
-  <script type="module" src="auth.js?v=1"></script>
-  <script type="module" src="people.js?v=1"></script>
+  <div class="nav">
+    <a href="/home.html">Home</a>
+    <a href="/ideas.html">Ideas</a>
+    <a class="active" href="/people.html">Find People</a>
+    <a href="/messages.html">Messages</a>
+    <a href="/profile.html">Profile</a>
+    <a href="/create-profile.html">Create Profile</a>
+    <button type="button" onclick="logout()">Logout</button>
+  </div>
+
+  <div class="main">
+
+    <div class="row">
+      <div class="h1" style="margin:0;">People</div>
+      <span class="badge" id="count">0</span>
+    </div>
+
+    <div class="status" id="status"></div>
+
+    <div class="list" id="list"></div>
+
+  </div>
+
+  <div class="footer">
+    Developed by Kshiprant
+  </div>
+
+</div>
+
+<script type="module" src="auth.js?v=1"></script>
+<script type="module" src="people.js?v=1"></script>
+
 </body>
 </html>
