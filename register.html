@@ -1,35 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<title>Create Account</title>
-<link rel="stylesheet" href="style.css">
-
+  <title>Skillfeed | Register</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+  <div class="phone">
+    <div class="topbar">
+      <div class="brand">Skillfeed</div>
+      <div class="sub">Create your account.</div>
+    </div>
 
-<div class="container">
+    <div class="main">
+      <div class="h1">Register</div>
+      <div class="card grid">
+        <input id="email" placeholder="Email" type="email">
+        <input id="password" placeholder="Password (min 6 chars)" type="password">
+        <button class="btn" id="registerBtn">Create Account</button>
+        <button class="btn secondary" onclick="window.location.href='/index.html'">Back to login</button>
+        <div class="status" id="status"></div>
+      </div>
+    </div>
 
-<h1>Create Skillfeed Account</h1>
+    <div class="footer">Developed by Kshiprant</div>
+  </div>
 
-<input id="email" placeholder="Email">
-<input id="password" type="password" placeholder="Password">
-
-<button onclick="register()">Create Account</button>
-
-<p>
-Already have an account?
-<a href="/">Login</a>
-</p>
-
-</div>
-
-<footer>
-Developed by Kshiprant
-</footer>
-
-<script type="module" src="auth.js"></script>
-
+  <script type="module" src="register.js?v=1"></script>
 </body>
 </html>
