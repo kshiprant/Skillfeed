@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Skillfeed</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Skillfeed</h1>
+<p>Build Startups Together</p>
+
+</header>
+
+<section>
+
+<h2>Create Skill Profile</h2>
+
+<input id="name" placeholder="Your Name">
+
+<input id="skillHave" placeholder="Skill You Have">
+
+<input id="skillWant" placeholder="Skill You Want">
+
+<select id="level">
+
+<option value="1">Level 1 - Beginner</option>
+<option value="2">Level 2 - Intermediate</option>
+<option value="3">Level 3 - Skilled</option>
+<option value="4">Level 4 - Expert</option>
+<option value="5">Level 5 - Master</option>
+
+</select>
+
+<button onclick="postSkill()">Post Skill</button>
+
+</section>
+
+<section>
+
+<h2>Idea Hub</h2>
+
+<input id="idea" placeholder="Startup Idea">
+
+<button onclick="postIdea()">Post Idea</button>
+
+<div id="ideas"></div>
+
+</section>
+
+<section>
+
+<h2>AI Co-Founder Finder</h2>
+
+<input id="founderSkill" placeholder="Skill Needed">
+
+<button onclick="findCoFounder()">Find Co-Founder</button>
+
+<div id="founderResults"></div>
+
+</section>
+
+<section>
+
+<h2>Skill Matches</h2>
+
+<button onclick="findMatches()">Find Collaborators</button>
+
+<div id="matches"></div>
+
+</section>
+
+<footer>
+
+<p>Developed by Kshiprant</p>
+
+</footer>
+
+<script src="firebase.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
