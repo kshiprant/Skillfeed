@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Skillfeed | Home</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body data-protected="1">
   <div class="phone">
     <div class="topbar">
@@ -18,7 +21,7 @@
       <a href="/messages.html">Messages</a>
       <a href="/profile.html">Profile</a>
       <a href="/create-profile.html">Create Profile</a>
-      <button onclick="logout()">Logout</button>
+      <button type="button" onclick="logout()">Logout</button>
     </div>
 
     <div class="main">
@@ -36,8 +39,12 @@
         <div class="hr"></div>
 
         <div class="grid">
-          <button class="btn" onclick="window.location.href='/create-profile.html'">Create / Update Profile</button>
-          <button class="btn secondary" onclick="window.location.href='/people.html'">Explore People</button>
+          <button class="btn" type="button" onclick="window.location.href='/create-profile.html'">
+            Create / Update Profile
+          </button>
+          <button class="btn secondary" type="button" onclick="window.location.href='/people.html'">
+            Explore People
+          </button>
         </div>
       </div>
     </div>
