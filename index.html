@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Skillfeed | Login</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <div class="phone">
     <div class="topbar">
@@ -13,11 +16,17 @@
 
     <div class="main">
       <div class="h1">Login</div>
+
       <div class="card grid">
-        <input id="email" placeholder="Email" type="email">
-        <input id="password" placeholder="Password" type="password">
-        <button class="btn" id="loginBtn">Login</button>
-        <button class="btn secondary" onclick="window.location.href='/register.html'">Create new account</button>
+        <input id="email" placeholder="Email" type="email" autocomplete="email">
+        <input id="password" placeholder="Password" type="password" autocomplete="current-password">
+
+        <button class="btn" id="loginBtn" type="button">Login</button>
+
+        <button class="btn secondary" type="button" onclick="window.location.href='/register.html'">
+          Create new account
+        </button>
+
         <div class="status" id="status"></div>
       </div>
     </div>
