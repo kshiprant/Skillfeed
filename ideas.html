@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Skillfeed | Ideas</title>
-
 <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body data-protected="1">
-
 <div class="phone">
 
   <div class="topbar">
@@ -31,34 +27,29 @@
 
   <div class="main">
 
-    <div class="card">
-      <div class="h1">Startup Ideas</div>
-
-      <div class="small" style="text-align:left;">
-        This section will allow users to share startup ideas and find collaborators.
-      </div>
-
-      <div class="hr"></div>
-
-      <div class="grid">
-        <button class="btn">Post New Idea</button>
-        <button class="btn secondary">Browse Projects</button>
-      </div>
-
-      <div class="status" style="margin-top:12px;">
-        Coming next: idea posts, join requests, and project collaboration.
-      </div>
+    <div class="row">
+      <div class="h1" style="margin:0;">Startup Ideas</div>
+      <span class="badge" id="count">0</span>
     </div>
 
+    <div class="card grid" style="margin-top:10px;">
+      <input id="ideaTitle" placeholder="Idea title (e.g. AI Fitness Coach)">
+      <textarea id="ideaDesc" placeholder="Describe your idea and who you need..."></textarea>
+      <button class="btn" id="postIdeaBtn" type="button">Post New Idea</button>
+      <div class="status" id="status"></div>
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="list" id="ideasList"></div>
+
   </div>
 
-  <div class="footer">
-    Developed by Kshiprant
-  </div>
+  <div class="footer">Developed by Kshiprant</div>
 
 </div>
 
 <script type="module" src="auth.js?v=1"></script>
-
+<script type="module" src="ideas.js?v=1"></script>
 </body>
 </html>
