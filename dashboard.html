@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Skillfeed Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<h1>Skillfeed Dashboard</h1>
+
+<button onclick="logout()">Logout</button>
+
+<section>
+
+<h2>Add Skill</h2>
+
+<input id="skill" placeholder="Skill name">
+
+<input id="level" placeholder="Level 1-10">
+
+<button onclick="addSkill()">Post Skill</button>
+
+</section>
+
+<section>
+
+<h2>Create Startup Idea</h2>
+
+<input id="ideaTitle" placeholder="Idea title">
+
+<textarea id="ideaDesc" placeholder="Describe idea"></textarea>
+
+<button onclick="postIdea()">Post Idea</button>
+
+</section>
+
+<section>
+
+<h2>Find Co-Founder</h2>
+
+<input id="searchSkill" placeholder="Search skill">
+
+<button onclick="searchSkill()">Search</button>
+
+<div id="results"></div>
+
+</section>
+
+<footer>
+Developed by Kshiprant
+</footer>
+
+<script type="module" src="dashboard.js"></script>
+
+</body>
+</html>
