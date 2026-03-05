@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Skillfeed | Create Profile</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body data-protected="1">
   <div class="phone">
     <div class="topbar">
@@ -18,14 +21,14 @@
       <a href="/messages.html">Messages</a>
       <a href="/profile.html">Profile</a>
       <a class="active" href="/create-profile.html">Create Profile</a>
-      <button onclick="logout()">Logout</button>
+      <button type="button" onclick="logout()">Logout</button>
     </div>
 
     <div class="main">
       <div class="h1">Create Your Profile</div>
 
       <div class="card grid">
-        <input id="name" placeholder="Your Name">
+        <input id="name" placeholder="Your Name" autocomplete="name">
         <input id="skills" placeholder="Your Skills (e.g. React, AI, Marketing)">
         <input id="location" placeholder="Location (City, Country)">
         <input id="startup" placeholder="Startup Interest (e.g. SaaS, AI, FinTech)">
@@ -39,7 +42,7 @@
           <option value="5">Level 5 - Expert</option>
         </select>
 
-        <button class="btn" id="saveBtn">Save Profile</button>
+        <button class="btn" id="saveBtn" type="button">Save Profile</button>
         <div class="status" id="status"></div>
       </div>
     </div>
