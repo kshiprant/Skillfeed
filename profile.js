@@ -1,47 +1,42 @@
-import { auth, db } from "./firebase.js"
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Skillfeed | Find People</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"
+<body>
 
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"
+<header>
+  <h1>Skillfeed</h1>
 
-let currentUser = null
+  <nav>
+    <a href="/home.html">Home</a>
+    <a href="/ideas.html">Ideas</a>
+    <a href="/people.html">Find People</a>
+    <a href="/messages.html">Messages</a>
+    <a href="/profile.html">Profile</a>
+    <a href="/create-profile.html">Create Profile</a>
+    <button onclick="logout()">Logout</button>
+  </nav>
+</header>
 
-onAuthStateChanged(auth,(user)=>{
+<div class="main">
+  <h2>Find People</h2>
 
-if(user){
+  <div class="card" style="width: 380px;">
+    <input id="searchInput" placeholder="Search by name / skill / location / interest">
+    <button id="searchBtn">Search</button>
+    <button id="clearBtn">Clear</button>
+  </div>
 
-currentUser = user
+  <div id="peopleList"></div>
+</div>
 
-}else{
+<footer>Developed by Kshiprant</footer>
 
-window.location.href="/"
+<script type="module" src="people.js"></script>
+<script type="module" src="auth.js"></script>
 
-}
-
-})
-
-window.saveProfile = async function(){
-
-const name = document.getElementById("name").value
-const skills = document.getElementById("skills").value
-const location = document.getElementById("location").value
-const startup = document.getElementById("startup").value
-const bio = document.getElementById("bio").value
-const level = document.getElementById("level").value
-
-await setDoc(doc(db,"users",currentUser.uid),{
-
-name:name,
-skills:skills,
-location:location,
-startup:startup,
-bio:bio,
-level:level
-
-})
-
-alert("Profile Created!")
-
-window.location.href="/people.html"
-
-}
+</body>
+</html>
