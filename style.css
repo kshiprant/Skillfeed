@@ -193,3 +193,37 @@ textarea{ min-height: 90px; resize:none; }
   color: var(--muted);
   background: #fbfdff;
 }
+/* ===== Mobile dimension fix (keeps your theme/layout) ===== */
+
+.phone{
+  width: 100%;
+}
+
+/* Prevent sideways scroll on phone */
+body{
+  overflow-x: hidden;
+}
+
+/* Phone screens */
+@media (max-width: 600px){
+  .phone{
+    max-width: 100%;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 100vh;
+  }
+}
+
+/* Desktop / larger screens */
+@media (min-width: 601px){
+  .phone{
+    max-width: 420px;
+    margin: 18px auto;
+    border: 1px solid var(--line);
+    border-radius: 26px;
+    box-shadow: var(--shadow);
+    min-height: calc(100vh - 36px);
+  }
+}
