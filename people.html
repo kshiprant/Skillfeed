@@ -4,39 +4,37 @@
   <title>Skillfeed | Find People</title>
   <link rel="stylesheet" href="style.css">
 </head>
+<body data-protected="1">
+  <div class="phone">
+    <div class="topbar">
+      <div class="brand">Skillfeed</div>
+      <div class="sub">Discover builders nearby (and worldwide).</div>
+    </div>
 
-<body>
+    <div class="nav">
+      <a href="/home.html">Home</a>
+      <a href="/ideas.html">Ideas</a>
+      <a class="active" href="/people.html">Find People</a>
+      <a href="/messages.html">Messages</a>
+      <a href="/profile.html">Profile</a>
+      <a href="/create-profile.html">Create Profile</a>
+      <button onclick="logout()">Logout</button>
+    </div>
 
-<header>
-  <h1>Skillfeed</h1>
+    <div class="main">
+      <div class="row">
+        <div class="h1" style="margin:0;">People</div>
+        <span class="badge" id="count">0</span>
+      </div>
 
-  <nav>
-    <a href="/home.html">Home</a>
-    <a href="/ideas.html">Ideas</a>
-    <a href="/people.html">Find People</a>
-    <a href="/messages.html">Messages</a>
-    <a href="/profile.html">Profile</a>
-    <a href="/create-profile.html">Create Profile</a>
-    <button onclick="logout()">Logout</button>
-  </nav>
-</header>
+      <div class="status" id="status"></div>
+      <div class="list" id="list"></div>
+    </div>
 
-<div class="main">
-  <h2>Find People</h2>
-
-  <div class="card" style="width: 380px;">
-    <input id="searchInput" placeholder="Search by name / skill / location / interest">
-    <button id="searchBtn">Search</button>
-    <button id="clearBtn">Clear</button>
+    <div class="footer">Developed by Kshiprant</div>
   </div>
 
-  <div id="peopleList"></div>
-</div>
-
-<footer>Developed by Kshiprant</footer>
-
-<script type="module" src="people.js"></script>
-<script type="module" src="auth.js"></script>
-
+  <script type="module" src="auth.js?v=1"></script>
+  <script type="module" src="people.js?v=1"></script>
 </body>
 </html>
