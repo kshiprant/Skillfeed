@@ -1,51 +1,19 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-<title>Skillfeed Ideas</title>
-<link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<header>
-
-<h1>Skillfeed</h1>
-
-<nav>
-
-<a href="/home.html">Home</a>
-<a href="/ideas.html">Ideas</a>
-<a href="/people.html">Find People</a>
-<a href="/messages.html">Messages</a>
-<a href="/profile.html">Profile</a>
-
-<button onclick="logout()">Logout</button>
-
-</nav>
-
-</header>
-
-<div class="main">
-
-<h2>Startup Ideas</h2>
-
-<div class="card">
-
-<h3>AI Study Planner</h3>
-<p>Looking for ML engineer and designer.</p>
-
-<button>Join Project</button>
-
+<head><title>Skillfeed | Ideas</title><link rel="stylesheet" href="style.css"></head>
+<body data-protected="1">
+<div class="phone">
+  <div class="topbar"><div class="brand">Skillfeed</div><div class="sub">Startup ideas board.</div></div>
+  <div class="nav">
+    <a href="/home.html">Home</a><a class="active" href="/ideas.html">Ideas</a>
+    <a href="/people.html">Find People</a><a href="/messages.html">Messages</a>
+    <a href="/profile.html">Profile</a><a href="/create-profile.html">Create Profile</a>
+    <button onclick="logout()">Logout</button>
+  </div>
+  <div class="main">
+    <div class="card">Ideas page (next). We’ll add “Post idea” + “Join project”.</div>
+  </div>
+  <div class="footer">Developed by Kshiprant</div>
 </div>
-
-</div>
-
-<footer>
-Developed by Kshiprant
-</footer>
-
-<script type="module" src="auth.js"></script>
-
-</body>
-</html>
+<script type="module" src="auth.js?v=1"></script>
+</body></html>
