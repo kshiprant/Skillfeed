@@ -1,25 +1,23 @@
 import { auth, db } from "./firebase.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { doc, setDoc, setLogLevel } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-setLogLevel("debug");
-
-const saveBtn = document.getElementById("saveBtn");
 const status = document.getElementById("status");
-
-let currentUser = null;
+const saveBtn = document.getElementById("saveBtn");
 
 function setStatus(msg) {
   if (status) status.innerText = msg;
 }
 
-window.addEventListener("error", (e) => {
-  setStatus("JS Error: " + (e?.message || e));
-});
+// PROOF the script loaded
+setStatus("profile.js loaded ✅");
 
-window.addEventListener("unhandledrejection", (e) => {
-  setStatus("Promise Error: " + (e?.reason?.message || e?.reason || e));
-});
+if (!saveBtn) {
+  setStatus("ERROR: Save button not found (id=saveBtn)");
+  throw new Error("Save button not found");
+}
+
+let currentUser = null;
 
 onAuthStateChanged(auth, (user) => {
   if (!user) {
@@ -28,17 +26,8 @@ onAuthStateChanged(auth, (user) => {
     return;
   }
   currentUser = user;
-  setStatus("Logged in as: " + (user.email || "unknown"));
+  setStatus("Logged in ✅ (" + (user.email || "unknown") + ")");
 });
-
-function withTimeout(promise, ms = 10000) {
-  return Promise.race([
-    promise,
-    new Promise((_, reject) =>
-      setTimeout(() => reject(new Error("Timeout: Firestore not responding in " + ms / 1000 + "s")), ms)
-    ),
-  ]);
-}
 
 saveBtn.addEventListener("click", async () => {
   try {
@@ -47,4 +36,37 @@ saveBtn.addEventListener("click", async () => {
       return;
     }
     if (!db) {
-      set
+      setStatus("DB not initialized. Check firebase.js");
+      return;
+    }
+
+    const name = document.getElementById("name").value.trim();
+    const skills = document.getElementById("skills").value.trim();
+    const location = document.getElementById("location").value.trim();
+    const startup = document.getElementById("startup").value.trim();
+    const bio = document.getElementById("bio").value.trim();
+    const level = document.getElementById("level").value;
+
+    if (!name) {
+      setStatus("Please enter your name.");
+      return;
+    }
+
+    setStatus("Saving...");
+
+    // IMPORTANT: Your Firestore collection is "Users" (capital U)
+    await setDoc(doc(db, "Users", currentUser.uid), {
+      name, skills, location, startup, bio, level,
+      email: currentUser.email || "",
+      updatedAt: Date.now()
+    }, { merge: true });
+
+    setStatus("✅ Saved! Redirecting...");
+    setTimeout(() => (window.location.href = "/profile.html"), 700);
+
+  } catch (e) {
+    console.error(e);
+    setStatus("❌ Save failed: " + (e?.message || e));
+    alert("Save failed: " + (e?.message || e));
+  }
+});
