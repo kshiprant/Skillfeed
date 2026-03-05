@@ -1,47 +1,67 @@
-import { auth, db } from "./firebase.js"
+import { auth, db } from "./firebase.js";
 
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"
+import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-let currentUser = null
+const saveBtn = document.getElementById("saveBtn");
+const statusEl = document.getElementById("status");
 
-onAuthStateChanged(auth,(user)=>{
+let currentUser = null;
 
-if(user){
-
-currentUser = user
-
-}else{
-
-window.location.href="/"
-
+function setStatus(msg) {
+  if (statusEl) statusEl.innerText = msg;
 }
 
-})
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    // Not logged in → send to login
+    window.location.href = "/";
+    return;
+  }
+  currentUser = user;
+});
 
-window.saveProfile = async function(){
+saveBtn.addEventListener("click", async () => {
+  try {
+    if (!currentUser) {
+      setStatus("Not logged in. Redirecting...");
+      window.location.href = "/";
+      return;
+    }
 
-const name = document.getElementById("name").value
-const skills = document.getElementById("skills").value
-const location = document.getElementById("location").value
-const startup = document.getElementById("startup").value
-const bio = document.getElementById("bio").value
-const level = document.getElementById("level").value
+    const name = document.getElementById("name").value.trim();
+    const skills = document.getElementById("skills").value.trim();
+    const location = document.getElementById("location").value.trim();
+    const startup = document.getElementById("startup").value.trim();
+    const bio = document.getElementById("bio").value.trim();
+    const level = document.getElementById("level").value;
 
-await setDoc(doc(db,"users",currentUser.uid),{
+    if (!name) {
+      setStatus("Please enter your name.");
+      return;
+    }
 
-name:name,
-skills:skills,
-location:location,
-startup:startup,
-bio:bio,
-level:level
+    setStatus("Saving...");
 
-})
+    await setDoc(doc(db, "users", currentUser.uid), {
+      name,
+      skills,
+      location,
+      startup,
+      bio,
+      level,
+      email: currentUser.email || "",
+      updatedAt: Date.now()
+    }, { merge: true });
 
-alert("Profile Created!")
+    setStatus("✅ Profile saved!");
+    // Go to people page to see yourself
+    window.location.href = "/people.html";
 
-window.location.href="/people.html"
-
-}
+  } catch (err) {
+    console.error(err);
+    setStatus("❌ Error: " + (err?.message || "Unknown error"));
+    alert(err?.message || "Failed to save profile");
+  }
+});
