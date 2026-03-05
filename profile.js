@@ -1,30 +1,17 @@
 import { auth, db } from "./firebase.js";
 
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
 import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const saveBtn = document.getElementById("saveBtn");
 const status = document.getElementById("status");
 
-let userLoaded = false;
-let currentUser = null;
-
-onAuthStateChanged(auth, (user) => {
-
-  if (user) {
-    currentUser = user;
-    userLoaded = true;
-  } else {
-    window.location.href = "/";
-  }
-
-});
-
 saveBtn.addEventListener("click", async () => {
 
-  if (!userLoaded) {
-    alert("User not ready yet. Try again.");
+  const user = auth.currentUser;
+
+  if (!user) {
+    alert("You must be logged in.");
+    window.location.href = "/";
     return;
   }
 
@@ -39,14 +26,14 @@ saveBtn.addEventListener("click", async () => {
 
   try {
 
-    await setDoc(doc(db, "users", currentUser.uid), {
+    await setDoc(doc(db, "users", user.uid), {
       name,
       skills,
       location,
       startup,
       bio,
       level,
-      email: currentUser.email
+      email: user.email
     });
 
     status.innerText = "Profile saved";
