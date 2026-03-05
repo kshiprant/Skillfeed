@@ -2,6 +2,9 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
 const firebaseConfig = {
 
 apiKey: "AIzaSyCfsQJHExYNMyUb4eNFqdCQxW50qPtmrok",
@@ -20,8 +23,13 @@ measurementId: "G-TC9M770VGL"
 
 };
 
+
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
 
-export { auth };
+const db = getFirestore(app);
+
+
+// Export both so other files can use them
+export { auth, db };
