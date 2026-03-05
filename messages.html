@@ -1,19 +1,59 @@
 <!DOCTYPE html>
-<html>
-<head><title>Skillfeed | Messages</title><link rel="stylesheet" href="style.css"></head>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skillfeed | Messages</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
 <body data-protected="1">
+
 <div class="phone">
-  <div class="topbar"><div class="brand">Skillfeed</div><div class="sub">Messaging (next).</div></div>
+
+  <div class="topbar">
+    <div class="brand">Skillfeed</div>
+    <div class="sub">Messaging (next).</div>
+  </div>
+
   <div class="nav">
-    <a href="/home.html">Home</a><a href="/ideas.html">Ideas</a>
-    <a href="/people.html">Find People</a><a class="active" href="/messages.html">Messages</a>
-    <a href="/profile.html">Profile</a><a href="/create-profile.html">Create Profile</a>
-    <button onclick="logout()">Logout</button>
+    <a href="/home.html">Home</a>
+    <a href="/ideas.html">Ideas</a>
+    <a href="/people.html">Find People</a>
+    <a class="active" href="/messages.html">Messages</a>
+    <a href="/profile.html">Profile</a>
+    <a href="/create-profile.html">Create Profile</a>
+    <button type="button" onclick="logout()">Logout</button>
   </div>
+
   <div class="main">
-    <div class="card">Messages page (next). We’ll add 1-to-1 chat using Firestore.</div>
+
+    <div class="card">
+      <div class="h1">Messages</div>
+
+      <div class="small" style="text-align:left;">
+        This section will allow users to communicate with collaborators.
+      </div>
+
+      <div class="hr"></div>
+
+      <div class="status">
+        Coming next: 1-to-1 real-time chat using Firebase Firestore.
+      </div>
+    </div>
+
   </div>
-  <div class="footer">Developed by Kshiprant</div>
+
+  <div class="footer">
+    Developed by Kshiprant
+  </div>
+
 </div>
+
 <script type="module" src="auth.js?v=1"></script>
-</body></html>
+
+</body>
+</html>
