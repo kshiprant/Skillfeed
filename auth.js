@@ -1,41 +1,48 @@
 import { auth } from "./firebase.js";
+
 import { 
 createUserWithEmailAndPassword,
 signInWithEmailAndPassword
-} from "firebase/auth";
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-window.register = async function () {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+window.register = function () {
 
-  try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+const email = document.getElementById("email").value;
+const password = document.getElementById("password").value;
 
-    alert("User registered successfully!");
-    console.log(userCredential.user);
-  } catch (error) {
-    alert(error.message);
-  }
+createUserWithEmailAndPassword(auth, email, password)
+.then((userCredential) => {
+
+const user = userCredential.user;
+
+alert("Registration Successful: " + user.email);
+
+})
+.catch((error) => {
+
+alert(error.message);
+
+});
+
 };
 
-window.login = async function () {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+window.login = function () {
 
-  try {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+const email = document.getElementById("email").value;
+const password = document.getElementById("password").value;
 
-    alert("Login successful!");
-    console.log(userCredential.user);
-  } catch (error) {
-    alert(error.message);
-  }
+signInWithEmailAndPassword(auth, email, password)
+.then((userCredential) => {
+
+const user = userCredential.user;
+
+alert("Login Successful: " + user.email);
+
+})
+.catch((error) => {
+
+alert(error.message);
+
+});
+
 };
