@@ -1,6 +1,8 @@
+/* GENERAL PAGE STYLE */
+
 body{
 
-font-family:Arial;
+font-family: Arial;
 
 background:#111;
 
@@ -10,7 +12,11 @@ text-align:center;
 
 padding-top:100px;
 
+margin:0;
+
 }
+
+/* LOGIN / REGISTER CONTAINER */
 
 .container{
 
@@ -19,6 +25,8 @@ width:300px;
 margin:auto;
 
 }
+
+/* INPUT FIELDS */
 
 input{
 
@@ -34,6 +42,8 @@ border-radius:5px;
 
 }
 
+/* BUTTONS */
+
 button{
 
 padding:10px 20px;
@@ -48,7 +58,17 @@ border-radius:5px;
 
 cursor:pointer;
 
+margin-top:10px;
+
 }
+
+button:hover{
+
+background:#00a5d6;
+
+}
+
+/* FOOTER */
 
 footer{
 
@@ -61,5 +81,79 @@ width:100%;
 text-align:center;
 
 font-size:12px;
+
+}
+
+/* ===== DASHBOARD STYLES ===== */
+
+header{
+
+background:#000;
+
+padding:20px;
+
+position:fixed;
+
+top:0;
+
+width:100%;
+
+}
+
+/* NAVIGATION MENU */
+
+nav{
+
+margin-top:10px;
+
+}
+
+nav a{
+
+margin:0 15px;
+
+color:#00c2ff;
+
+text-decoration:none;
+
+font-weight:bold;
+
+}
+
+nav a:hover{
+
+text-decoration:underline;
+
+}
+
+/* MAIN DASHBOARD CONTENT */
+
+.main{
+
+padding:120px 20px;
+
+}
+
+/* IDEA CARDS */
+
+.card{
+
+background:#1a1a1a;
+
+padding:20px;
+
+margin:20px auto;
+
+width:350px;
+
+border-radius:10px;
+
+box-shadow:0px 0px 10px rgba(0,0,0,0.5);
+
+}
+
+.card h3{
+
+margin-top:0;
 
 }
