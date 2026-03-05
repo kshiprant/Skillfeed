@@ -1,29 +1,46 @@
 import {
-
 auth,
 createUserWithEmailAndPassword,
 signInWithEmailAndPassword
-
 } from "./firebase.js";
 
-window.register = async function(){
+window.register = async function () {
 
 const email = document.getElementById("email").value;
 const password = document.getElementById("password").value;
 
-await createUserWithEmailAndPassword(auth,email,password);
+try {
 
-alert("Account created");
+await createUserWithEmailAndPassword(auth, email, password);
+
+alert("Account created successfully");
+
+} catch (error) {
+
+alert(error.message);
 
 }
 
-window.login = async function(){
+};
+
+
+window.login = async function () {
 
 const email = document.getElementById("email").value;
 const password = document.getElementById("password").value;
 
-await signInWithEmailAndPassword(auth,email,password);
+try {
 
-window.location = "dashboard.html";
+await signInWithEmailAndPassword(auth, email, password);
+
+alert("Login successful");
+
+window.location.href = "dashboard.html";
+
+} catch (error) {
+
+alert(error.message);
 
 }
+
+};
