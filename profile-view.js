@@ -1,42 +1,53 @@
 import { auth, db } from "./firebase.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const card = document.getElementById("profileCard");
+const status = document.getElementById("status");
 
-function safe(v){ return (v ?? "").toString(); }
+function setStatus(t){ status.textContent = t; }
 
-onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    window.location.href = "/";
-    return;
-  }
+(async function load(){
+  const user = auth.currentUser;
+  if (!user) return; // auth.js will redirect
 
-  try {
-    const ref = doc(db, "users", user.uid);
-    const snap = await getDoc(ref);
-
-    if (!snap.exists()) {
+  try{
+    const snap = await getDoc(doc(db, "users", user.uid));
+    if (!snap.exists()){
       card.innerHTML = `
-        <p>No profile found yet.</p>
-        <a href="/create-profile.html">Create your profile</a>
+        <div class="row">
+          <div>
+            <b>No profile found.</b>
+            <div class="small" style="text-align:left;">Create your profile to appear on Find People.</div>
+          </div>
+        </div>
+        <div class="hr"></div>
+        <button class="btn" onclick="window.location.href='/create-profile.html'">Create Profile</button>
       `;
       return;
     }
 
     const p = snap.data();
-
     card.innerHTML = `
-      <h3>${safe(p.name) || "Unnamed"} <span style="font-size:12px;opacity:.8;">(Level ${safe(p.level)})</span></h3>
-      <p><b>Email:</b> ${safe(p.email) || safe(user.email)}</p>
-      <p><b>Skills:</b> ${safe(p.skills) || "-"}</p>
-      <p><b>Location:</b> ${safe(p.location) || "-"}</p>
-      <p><b>Startup Interest:</b> ${safe(p.startup) || "-"}</p>
-      <p><b>Bio:</b> ${safe(p.bio) || "-"}</p>
-      <a href="/create-profile.html">Edit profile</a>
+      <div class="row">
+        <div>
+          <div style="font-weight:900;font-size:16px;">${p.name || "Unnamed"}</div>
+          <div class="small" style="text-align:left;">${p.email || user.email || ""}</div>
+        </div>
+        <span class="badge">Level ${p.level || "1"}</span>
+      </div>
+      <div class="hr"></div>
+      <div class="grid">
+        <div><b>Skills:</b> <span class="small">${p.skills || "-"}</span></div>
+        <div><b>Location:</b> <span class="small">${p.location || "-"}</span></div>
+        <div><b>Startup Interest:</b> <span class="small">${p.startup || "-"}</span></div>
+        <div><b>Bio:</b> <span class="small">${p.bio || "-"}</span></div>
+      </div>
+      <div class="hr"></div>
+      <button class="btn secondary" onclick="window.location.href='/create-profile.html'">Edit Profile</button>
     `;
-  } catch (e) {
+  }catch(e){
     console.error(e);
-    card.innerText = "Error loading profile: " + (e?.message || e);
+    setStatus("❌ " + (e.message || e));
+    card.textContent = "Failed to load profile.";
   }
-});
+})();
