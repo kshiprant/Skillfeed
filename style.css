@@ -1,50 +1,65 @@
 body{
 
-background:#0f172a;
-color:white;
 font-family:Arial;
+
+background:#111;
+
+color:white;
+
 text-align:center;
+
+padding-top:100px;
 
 }
 
 .container{
 
-margin-top:100px;
+width:300px;
+
+margin:auto;
 
 }
 
-input, textarea{
+input{
 
-width:300px;
+width:100%;
+
 padding:10px;
-margin:10px;
-border-radius:5px;
+
+margin:10px 0;
+
 border:none;
+
+border-radius:5px;
 
 }
 
 button{
 
 padding:10px 20px;
-background:#3b82f6;
+
+background:#00c2ff;
+
 border:none;
+
 color:white;
+
 border-radius:5px;
 
-}
-
-section{
-
-background:#1e293b;
-padding:30px;
-margin:20px;
-border-radius:10px;
+cursor:pointer;
 
 }
 
 footer{
 
-margin-top:40px;
-padding:20px;
+position:fixed;
+
+bottom:10px;
+
+width:100%;
+
+text-align:center;
+
+font-size:12px;
 
 }
