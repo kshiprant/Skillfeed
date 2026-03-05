@@ -1,56 +1,54 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
-<title>Create Profile | Skillfeed</title>
-
-<link rel="stylesheet" href="style.css">
-
+  <title>Create Profile | Skillfeed</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header>
+  <h1>Skillfeed</h1>
 
-<h1>Skillfeed</h1>
-
+  <nav>
+    <a href="/home.html">Home</a>
+    <a href="/ideas.html">Ideas</a>
+    <a href="/people.html">Find People</a>
+    <a href="/messages.html">Messages</a>
+    <a href="/profile.html">Profile</a>
+    <a href="/create-profile.html">Create Profile</a>
+    <button onclick="logout()">Logout</button>
+  </nav>
 </header>
 
-<div class="container">
+<div class="main">
+  <h2>Create Your Profile</h2>
 
-<h2>Create Your Profile</h2>
+  <div class="card" style="width:380px;">
+    <input id="name" placeholder="Your Name">
+    <input id="skills" placeholder="Your Skills (e.g. React, AI, Marketing)">
+    <input id="location" placeholder="Location (City, Country)">
+    <input id="startup" placeholder="Startup Interest (e.g. SaaS, AI, FinTech)">
 
-<input id="name" placeholder="Your Name">
+    <textarea id="bio" placeholder="Short bio" style="height:90px;"></textarea>
 
-<input id="skills" placeholder="Your Skills (e.g. React, AI, Marketing)">
+    <select id="level">
+      <option value="1">Level 1 - Learner</option>
+      <option value="2">Level 2 - Contributor</option>
+      <option value="3">Level 3 - Builder</option>
+      <option value="4">Level 4 - Founder</option>
+      <option value="5">Level 5 - Expert</option>
+    </select>
 
-<input id="location" placeholder="Location">
-
-<input id="startup" placeholder="Startup Interest">
-
-<textarea id="bio" placeholder="Short Bio"></textarea>
-
-<select id="level">
-
-<option value="1">Level 1 - Learner</option>
-<option value="2">Level 2 - Contributor</option>
-<option value="3">Level 3 - Builder</option>
-<option value="4">Level 4 - Founder</option>
-<option value="5">Level 5 - Expert</option>
-
-</select>
-
-<button onclick="saveProfile()">Save Profile</button>
-
+    <button id="saveBtn">Save Profile</button>
+    <p id="status" style="margin-top:10px; opacity:.85;"></p>
+  </div>
 </div>
 
-<footer>
-Developed by Kshiprant
-</footer>
+<footer>Developed by Kshiprant</footer>
 
 <script type="module" src="profile.js"></script>
+<script type="module" src="auth.js"></script>
 
 </body>
-
 </html>
