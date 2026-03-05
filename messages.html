@@ -1,48 +1,19 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-<title>Messages</title>
-<link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<header>
-
-<h1>Skillfeed</h1>
-
-<nav>
-
-<a href="/home.html">Home</a>
-<a href="/ideas.html">Ideas</a>
-<a href="/people.html">Find People</a>
-<a href="/messages.html">Messages</a>
-<a href="/profile.html">Profile</a>
-
-<button onclick="logout()">Logout</button>
-
-</nav>
-
-</header>
-
-<div class="main">
-
-<h2>Messages</h2>
-
-<div class="card">
-
-<p>No conversations yet.</p>
-
+<head><title>Skillfeed | Messages</title><link rel="stylesheet" href="style.css"></head>
+<body data-protected="1">
+<div class="phone">
+  <div class="topbar"><div class="brand">Skillfeed</div><div class="sub">Messaging (next).</div></div>
+  <div class="nav">
+    <a href="/home.html">Home</a><a href="/ideas.html">Ideas</a>
+    <a href="/people.html">Find People</a><a class="active" href="/messages.html">Messages</a>
+    <a href="/profile.html">Profile</a><a href="/create-profile.html">Create Profile</a>
+    <button onclick="logout()">Logout</button>
+  </div>
+  <div class="main">
+    <div class="card">Messages page (next). We’ll add 1-to-1 chat using Firestore.</div>
+  </div>
+  <div class="footer">Developed by Kshiprant</div>
 </div>
-
-</div>
-
-<footer>
-Developed by Kshiprant
-</footer>
-
-<script type="module" src="auth.js"></script>
-
-</body>
-</html>
+<script type="module" src="auth.js?v=1"></script>
+</body></html>
