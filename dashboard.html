@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Skillfeed Dashboard</title>
 
@@ -8,53 +11,67 @@
 
 </head>
 
-<body>
+<body data-protected="1">
 
-<h1>Skillfeed Dashboard</h1>
+<div class="phone">
 
-<button onclick="logout()">Logout</button>
+  <div class="topbar">
+    <div class="brand">Skillfeed</div>
+    <div class="sub">Build startups with the right people.</div>
+  </div>
 
-<section>
+  <div class="nav">
+    <a class="active" href="/home.html">Home</a>
+    <a href="/ideas.html">Ideas</a>
+    <a href="/people.html">Find People</a>
+    <a href="/messages.html">Messages</a>
+    <a href="/profile.html">Profile</a>
+    <a href="/create-profile.html">Create Profile</a>
+    <button onclick="logout()">Logout</button>
+  </div>
 
-<h2>Add Skill</h2>
+  <div class="main">
 
-<input id="skill" placeholder="Skill name">
+    <div class="h1">Dashboard</div>
 
-<input id="level" placeholder="Level 1-10">
+    <div class="card grid">
 
-<button onclick="addSkill()">Post Skill</button>
+      <div class="row">
+        <span class="badge">Add Skill</span>
+      </div>
 
-</section>
+      <input id="skill" placeholder="Skill name">
+      <input id="level" placeholder="Level 1-10">
 
-<section>
+      <button class="btn" onclick="addSkill()">Post Skill</button>
 
-<h2>Create Startup Idea</h2>
+    </div>
 
-<input id="ideaTitle" placeholder="Idea title">
+    <div class="hr"></div>
 
-<textarea id="ideaDesc" placeholder="Describe idea"></textarea>
+    <div class="card grid">
 
-<button onclick="postIdea()">Post Idea</button>
+      <div class="row">
+        <span class="badge">Create Startup Idea</span>
+      </div>
 
-</section>
+      <input id="ideaTitle" placeholder="Idea title">
+      <textarea id="ideaDesc" placeholder="Describe idea"></textarea>
 
-<section>
+      <button class="btn" onclick="postIdea()">Post Idea</button>
 
-<h2>Find Co-Founder</h2>
+    </div>
 
-<input id="searchSkill" placeholder="Search skill">
+    <div class="hr"></div>
 
-<button onclick="searchSkill()">Search</button>
+    <div class="card grid">
 
-<div id="results"></div>
+      <div class="row">
+        <span class="badge">Find Co-Founder</span>
+      </div>
 
-</section>
+      <input id="searchSkill" placeholder="Search skill">
 
-<footer>
-Developed by Kshiprant
-</footer>
+      <button class="btn secondary" onclick="searchSkill()">Search</button>
 
-<script type="module" src="dashboard.js"></script>
-
-</body>
-</html>
+      <div id="results" class="list"></
