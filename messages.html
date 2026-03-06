@@ -1,58 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Skillfeed | Messages</title>
-
-<link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skillfeed | Messages</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#2563eb" />
 </head>
 
-<body data-protected="1">
+<body>
+  <div class="app-shell">
 
-<div class="phone">
-
-  <div class="topbar">
-    <div class="brand">Skillfeed</div>
-    <div class="sub">Messaging (next).</div>
-  </div>
-
-  <div class="nav">
-    <a href="/home.html">Home</a>
-    <a href="/ideas.html">Ideas</a>
-    <a href="/people.html">Find People</a>
-    <a class="active" href="/messages.html">Messages</a>
-    <a href="/profile.html">Profile</a>
-    <button type="button" onclick="logout()">Logout</button>
-  </div>
-
-  <div class="main">
-
-    <div class="card">
-      <div class="h1">Messages</div>
-
-      <div class="small" style="text-align:left;">
-        This section will allow users to communicate with collaborators.
+    <header class="app-header">
+      <div>
+        <h1 class="brand-title">Skillfeed</h1>
+        <p class="brand-sub">Messaging for collaborators.</p>
       </div>
+      <button class="ghost-btn" onclick="logout()">Logout</button>
+    </header>
 
-      <div class="hr"></div>
+    <main class="app-main">
 
-      <div class="status">
-        Coming next: 1-to-1 real-time chat using Firebase Firestore.
-      </div>
-    </div>
+      <section class="section-head" style="margin-top: 4px;">
+        <div>
+          <h3>Messages</h3>
+          <p>Conversations with builders and collaborators</p>
+        </div>
+        <span class="pill">Soon</span>
+      </section>
+
+      <section class="hero-card">
+        <div class="hero-top">
+          <div>
+            <h2>Messaging is coming next</h2>
+            <p>This section will let users communicate with collaborators, co-builders, and connections.</p>
+          </div>
+          <span class="pill">Chat</span>
+        </div>
+
+        <div class="tags-wrap">
+          <span class="tag">1-to-1 Chat</span>
+          <span class="tag">Collaboration</span>
+          <span class="tag">Real-time</span>
+          <span class="tag">Builder Network</span>
+        </div>
+      </section>
+
+      <section class="hero-card" style="margin-top: 16px;">
+        <div class="hero-top">
+          <div>
+            <h2>What will be added here?</h2>
+            <p>Skillfeed messaging will become the communication layer of your startup network.</p>
+          </div>
+          <span class="pill">Roadmap</span>
+        </div>
+
+        <div class="feed-list">
+          <div class="person">
+            <h3>Direct Messages</h3>
+            <p>1-to-1 conversations between connected users.</p>
+          </div>
+
+          <div class="person">
+            <h3>Idea Discussions</h3>
+            <p>Continue project conversations beyond the public feed.</p>
+          </div>
+
+          <div class="person">
+            <h3>Collaboration Requests</h3>
+            <p>Discuss roles, expectations, and next steps before building.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="hero-card" style="margin-top: 16px;">
+        <div class="hero-top">
+          <div>
+            <h2>Current status</h2>
+            <p>The UI is ready. The real-time chat engine will be connected later.</p>
+          </div>
+          <span class="pill">MVP</span>
+        </div>
+
+        <div class="status-text">
+          Coming next: 1-to-1 messaging for connected collaborators.
+        </div>
+      </section>
+
+    </main>
+
+    <nav class="bottom-nav">
+      <a class="nav-item" href="/home.html">
+        <span>🏠</span>
+        <small>Home</small>
+      </a>
+      <a class="nav-item" href="/ideas.html">
+        <span>💡</span>
+        <small>Ideas</small>
+      </a>
+      <a class="nav-item" href="/people.html">
+        <span>👥</span>
+        <small>People</small>
+      </a>
+      <a class="nav-item active" href="/messages.html">
+        <span>💬</span>
+        <small>Messages</small>
+      </a>
+      <a class="nav-item" href="/profile.html">
+        <span>👤</span>
+        <small>Profile</small>
+      </a>
+    </nav>
 
   </div>
 
-  <div class="footer">
-    Developed by Kshiprant
-  </div>
+  <script>
+    function logout() {
+      localStorage.removeItem("skillfeed_logged_in");
+      window.location.href = "/index.html";
+    }
 
-</div>
-
-<script type="module" src="auth.js?v=1"></script>
-
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/service-worker.js").catch(console.error);
+      });
+    }
+  </script>
 </body>
 </html>
