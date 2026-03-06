@@ -4,13 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Skillfeed | Home</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css?v=9" />
   <meta name="theme-color" content="#2563eb" />
 </head>
 <body>
   <div class="app-shell">
-
     <header class="app-header">
       <div>
         <h1 class="brand-title">Skillfeed</h1>
@@ -20,7 +18,6 @@
     </header>
 
     <main class="app-main">
-
       <section class="hero-card">
         <div class="hero-top">
           <div>
@@ -48,32 +45,30 @@
       </section>
 
       <section id="ideasList" class="feed-list"></section>
-
     </main>
 
     <nav class="bottom-nav">
       <a class="nav-item active" href="/home.html">
-        <i data-lucide="house"></i>
+        <svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg>
         <small>Home</small>
       </a>
       <a class="nav-item" href="/ideas.html">
-        <i data-lucide="lightbulb"></i>
+        <svg viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.1 1.2 1.8h5.6c.2-.7.6-1.3 1.2-1.8A7 7 0 0 0 12 2z"/></svg>
         <small>Ideas</small>
       </a>
       <a class="nav-item" href="/people.html">
-        <i data-lucide="users"></i>
+        <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="3.5"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a3.5 3.5 0 0 1 0 6.74"/></svg>
         <small>People</small>
       </a>
       <a class="nav-item" href="/messages.html">
-        <i data-lucide="message-circle"></i>
+        <svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
         <small>Messages</small>
       </a>
       <a class="nav-item" href="/profile.html">
-        <i data-lucide="user"></i>
+        <svg viewBox="0 0 24 24"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></svg>
         <small>Profile</small>
       </a>
     </nav>
-
   </div>
 
   <script>
@@ -82,8 +77,6 @@
       window.location.href = "/index.html";
     }
   </script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script>lucide.createIcons();</script>
-  <script src="home.js"></script>
+  <script src="home.js?v=9"></script>
 </body>
 </html>
