@@ -1,72 +1,44 @@
-import { auth, db } from "./firebase.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+<div class="profile-container">
 
-const status = document.getElementById("status");
-const saveBtn = document.getElementById("saveBtn");
+  <div id="profile-view">
 
-function setStatus(msg) {
-  if (status) status.innerText = msg;
-}
+    <div class="avatar"></div>
 
-// PROOF the script loaded
-setStatus("profile.js loaded ✅");
+    <h2 id="profile-name"></h2>
+    <p id="profile-location"></p>
+    <span id="profile-level"></span>
 
-if (!saveBtn) {
-  setStatus("ERROR: Save button not found (id=saveBtn)");
-  throw new Error("Save button not found");
-}
+    <p id="profile-bio"></p>
 
-let currentUser = null;
+    <div id="profile-skills"></div>
 
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    setStatus("Not logged in. Redirecting...");
-    window.location.href = "/";
-    return;
-  }
-  currentUser = user;
-  setStatus("Logged in ✅ (" + (user.email || "unknown") + ")");
-});
+    <div id="profile-interest"></div>
 
-saveBtn.addEventListener("click", async () => {
-  try {
-    if (!currentUser) {
-      setStatus("User not ready yet. Try again.");
-      return;
-    }
-    if (!db) {
-      setStatus("DB not initialized. Check firebase.js");
-      return;
-    }
+    <button id="editBtn">Edit Profile</button>
 
-    const name = document.getElementById("name").value.trim();
-    const skills = document.getElementById("skills").value.trim();
-    const location = document.getElementById("location").value.trim();
-    const startup = document.getElementById("startup").value.trim();
-    const bio = document.getElementById("bio").value.trim();
-    const level = document.getElementById("level").value;
+  </div>
 
-    if (!name) {
-      setStatus("Please enter your name.");
-      return;
-    }
 
-    setStatus("Saving...");
+  <div id="profile-edit" style="display:none;">
 
-    // IMPORTANT: Your Firestore collection is "Users" (capital U)
-    await setDoc(doc(db, "Users", currentUser.uid), {
-      name, skills, location, startup, bio, level,
-      email: currentUser.email || "",
-      updatedAt: Date.now()
-    }, { merge: true });
+    <input id="name" placeholder="Your Name">
 
-    setStatus("✅ Saved! Redirecting...");
-    setTimeout(() => (window.location.href = "/profile.html"), 700);
+    <input id="skills" placeholder="Skills">
 
-  } catch (e) {
-    console.error(e);
-    setStatus("❌ Save failed: " + (e?.message || e));
-    alert("Save failed: " + (e?.message || e));
-  }
-});
+    <input id="location" placeholder="Location">
+
+    <input id="interest" placeholder="Startup Interest">
+
+    <textarea id="bio" placeholder="Bio"></textarea>
+
+    <select id="level">
+      <option>Level 1 - Learner</option>
+      <option>Level 2 - Builder</option>
+      <option>Level 3 - Founder</option>
+    </select>
+
+    <button id="saveProfile">Save</button>
+
+  </div>
+
+</div>
