@@ -8,7 +8,6 @@
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#2563eb" />
 </head>
-
 <body>
   <div class="app-shell">
 
@@ -30,21 +29,17 @@
         <span class="pill"><span id="count">0</span> users</span>
       </section>
 
-      <section class="hero-card" style="margin-bottom: 16px;">
+      <section class="hero-card">
         <div class="hero-top">
           <div>
             <h2>Search by username</h2>
-            <p>Quickly find people by username, name, skills, or startup interest.</p>
+            <p>Find people by username, name, skills, or startup interest.</p>
           </div>
           <span class="pill">People</span>
         </div>
 
         <div class="form-stack">
-          <input
-            id="searchUser"
-            type="text"
-            placeholder="Search by username..."
-          />
+          <input id="searchUser" type="text" placeholder="Search by username..." />
           <div class="status-text" id="status"></div>
         </div>
       </section>
@@ -55,23 +50,23 @@
 
     <nav class="bottom-nav">
       <a class="nav-item" href="/home.html">
-        <span>🏠</span>
+        <i data-lucide="house"></i>
         <small>Home</small>
       </a>
       <a class="nav-item" href="/ideas.html">
-        <span>💡</span>
+        <i data-lucide="lightbulb"></i>
         <small>Ideas</small>
       </a>
       <a class="nav-item active" href="/people.html">
-        <span>👥</span>
+        <i data-lucide="users"></i>
         <small>People</small>
       </a>
       <a class="nav-item" href="/messages.html">
-        <span>💬</span>
+        <i data-lucide="message-circle"></i>
         <small>Messages</small>
       </a>
       <a class="nav-item" href="/profile.html">
-        <span>👤</span>
+        <i data-lucide="user"></i>
         <small>Profile</small>
       </a>
     </nav>
@@ -83,14 +78,9 @@
       localStorage.removeItem("skillfeed_logged_in");
       window.location.href = "/index.html";
     }
-
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/service-worker.js").catch(console.error);
-      });
-    }
   </script>
-
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>lucide.createIcons();</script>
   <script src="people.js"></script>
 </body>
 </html>
