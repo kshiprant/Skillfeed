@@ -15,10 +15,13 @@ function setStatus(t){
   if (status) status.textContent = t;
 }
 
+/* ---------------- POST IDEA ---------------- */
+
 if (postIdeaBtn) {
 postIdeaBtn.addEventListener("click", async () => {
 
   const user = auth.currentUser;
+
   if (!user) {
     setStatus("❌ Please login again.");
     window.location.href = "/index.html";
@@ -52,14 +55,17 @@ postIdeaBtn.addEventListener("click", async () => {
     setTimeout(() => setStatus(""), 1200);
 
   } catch (e) {
+
     console.error(e);
     setStatus("❌ " + (e.message || e));
+
   }
 
 });
 }
 
-// Live list of ideas
+/* ---------------- LIVE IDEA FEED ---------------- */
+
 const q = query(collection(db, "ideas"), orderBy("createdAt", "desc"));
 
 onSnapshot(q, (snap) => {
@@ -87,11 +93,62 @@ onSnapshot(q, (snap) => {
       <p>${idea.desc || ""}</p>
       <p style="margin-top:8px;"><b>By:</b> ${idea.ownerEmail || "Unknown"}</p>
       <div class="hr"></div>
-      <button class="btn secondary" type="button" onclick="alert('Join requests next!')">Join Project</button>
+
+      <button 
+        class="btn secondary join-btn"
+        data-id="${d.id}"
+        data-owner="${idea.ownerUid}">
+        Join Project
+      </button>
     `;
 
     ideasList.appendChild(div);
 
   });
+
+});
+
+/* ---------------- JOIN REQUEST SYSTEM ---------------- */
+
+document.addEventListener("click", async (e) => {
+
+  if (!e.target.classList.contains("join-btn")) return;
+
+  const ideaId = e.target.dataset.id;
+  const ownerUid = e.target.dataset.owner;
+
+  const user = auth.currentUser;
+
+  if (!user) {
+    alert("Please login again.");
+    return;
+  }
+
+  if (user.uid === ownerUid) {
+    alert("You cannot join your own project.");
+    return;
+  }
+
+  try {
+
+    await addDoc(collection(db, "join_requests"), {
+
+      ideaId,
+      ownerUid,
+      requesterUid: user.uid,
+      requesterEmail: user.email || "",
+      status: "pending",
+      createdAt: serverTimestamp()
+
+    });
+
+    alert("✅ Request sent to project owner!");
+
+  } catch (err) {
+
+    console.error(err);
+    alert("❌ Error sending request.");
+
+  }
 
 });
