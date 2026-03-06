@@ -1,57 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Skillfeed | Ideas</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skillfeed | Ideas</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#2563eb" />
 </head>
 
-<body data-protected="1">
-<div class="phone">
+<body>
+  <div class="app-shell">
 
-  <div class="topbar">
-    <div class="brand">Skillfeed</div>
-    <div class="sub">Startup ideas board.</div>
-  </div>
-
-  <div class="nav">
-    <a href="/home.html">Home</a>
-    <a class="active" href="/ideas.html">Ideas</a>
-    <a href="/people.html">Find People</a>
-    <a href="/messages.html">Messages</a>
-    <a href="/profile.html">Profile</a>
-    <button type="button" onclick="logout()">Logout</button>
-  </div>
-
-  <div class="main">
-
-    <div class="card grid" style="margin-top:10px;">
-      <div class="h1" style="margin:0;">Post a Startup Idea</div>
-      <input id="ideaTitle" placeholder="Idea title (e.g. AI Fitness Coach)">
-      <textarea id="ideaDesc" placeholder="Describe your idea and who you need..."></textarea>
-      <button class="btn" id="postIdeaBtn" type="button">Post New Idea</button>
-      <div class="status" id="status"></div>
-    </div>
-
-    <div class="card" style="margin-top:12px;">
-      <div class="row">
-        <div class="h1" style="margin:0;">Posted Ideas</div>
-        <span class="badge"><span id="count">0</span> Posts</span>
+    <header class="app-header">
+      <div>
+        <h1 class="brand-title">Skillfeed</h1>
+        <p class="brand-sub">Startup ideas board.</p>
       </div>
+      <button class="ghost-btn" onclick="logout()">Logout</button>
+    </header>
 
-      <div class="hr"></div>
+    <main class="app-main">
 
-      <div class="list" id="ideasList"></div>
-    </div>
+      <section class="hero-card">
+        <div class="hero-top">
+          <div>
+            <h2>Post a startup idea</h2>
+            <p>Share what you want to build and attract the right collaborators.</p>
+          </div>
+          <span class="pill">Ideas</span>
+        </div>
+
+        <div class="form-stack">
+          <input id="ideaTitle" type="text" placeholder="Idea title (e.g. AI Fitness Coach)" />
+          <textarea id="ideaDesc" placeholder="Describe your idea and who you need..."></textarea>
+          <button class="primary-btn" id="postIdeaBtn" type="button">Post New Idea</button>
+          <div class="status-text" id="status"></div>
+        </div>
+      </section>
+
+      <section class="section-head">
+        <div>
+          <h3>Posted Ideas</h3>
+          <p>Explore and join startup concepts from the community</p>
+        </div>
+        <span class="pill"><span id="count">0</span> posts</span>
+      </section>
+
+      <section class="feed-list" id="ideasList"></section>
+
+    </main>
+
+    <nav class="bottom-nav">
+      <a class="nav-item" href="/home.html">
+        <span>🏠</span>
+        <small>Home</small>
+      </a>
+      <a class="nav-item active" href="/ideas.html">
+        <span>💡</span>
+        <small>Ideas</small>
+      </a>
+      <a class="nav-item" href="/people.html">
+        <span>👥</span>
+        <small>People</small>
+      </a>
+      <a class="nav-item" href="/messages.html">
+        <span>💬</span>
+        <small>Messages</small>
+      </a>
+      <a class="nav-item" href="/profile.html">
+        <span>👤</span>
+        <small>Profile</small>
+      </a>
+    </nav>
 
   </div>
 
-  <div class="footer">Developed by Kshiprant</div>
+  <script>
+    function logout() {
+      localStorage.removeItem("skillfeed_logged_in");
+      window.location.href = "/index.html";
+    }
 
-</div>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/service-worker.js").catch(console.error);
+      });
+    }
+  </script>
 
-<script type="module" src="auth.js?v=1"></script>
-<script type="module" src="ideas.js?v=1"></script>
+  <script src="ideas.js"></script>
 </body>
 </html>
