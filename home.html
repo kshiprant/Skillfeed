@@ -4,67 +4,91 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Skillfeed | Home</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#2563eb" />
 </head>
 
-<body data-protected="1">
-  <div class="phone">
-    <div class="topbar">
-      <div class="brand">Skillfeed</div>
-      <div class="sub">Your startup collaboration hub.</div>
-    </div>
+<body>
+  <div class="app-shell">
 
-    <div class="nav">
-      <a class="active" href="/home.html">Home</a>
-      <a href="/ideas.html">Ideas</a>
-      <a href="/people.html">Find People</a>
-      <a href="/messages.html">Messages</a>
-      <a href="/profile.html">Profile</a>
-      <button type="button" onclick="logout()">Logout</button>
-    </div>
+    <header class="app-header">
+      <div>
+        <h1 class="brand-title">Skillfeed</h1>
+        <p class="brand-sub">Build startups with the right people.</p>
+      </div>
+      <button class="ghost-btn" onclick="logout()">Logout</button>
+    </header>
 
-    <div class="main">
-      <div class="card">
-        <div class="row">
+    <main class="app-main">
+
+      <section class="hero-card">
+        <div class="hero-top">
           <div>
-            <div class="h1">Welcome to Skillfeed</div>
-            <div class="small" style="text-align:left;">
-              Build startups with the right people. Post your idea directly from here and find the right people to build with.
-            </div>
+            <h2>Post your startup idea</h2>
+            <p>Find builders, collaborators, and future co-founders.</p>
           </div>
-          <span class="badge">Level system ready</span>
+          <span class="pill">Live MVP</span>
         </div>
 
-        <div class="hr"></div>
-
-        <div class="grid" style="margin-top:12px;">
-          <input id="homeIdeaTitle" placeholder="Idea title (e.g. AI Fitness Coach)">
-          <textarea id="homeIdeaDesc" placeholder="Describe your idea and who you need..."></textarea>
-          <button class="btn" id="homePostIdeaBtn" type="button">Post Idea</button>
-          <div class="status" id="homeStatus"></div>
-
-          <button class="btn secondary" type="button" onclick="window.location.href='/people.html'">
-            Explore People
-          </button>
+        <div class="form-stack">
+          <input id="homeIdeaTitle" type="text" placeholder="Idea title (e.g. AI Fitness Coach)" />
+          <textarea id="homeIdeaDesc" placeholder="Describe your idea, vision, and who you need..."></textarea>
+          <button class="primary-btn" id="homePostIdeaBtn" type="button">Post Idea</button>
+          <div id="homeStatus" class="status-text"></div>
         </div>
-      </div>
+      </section>
 
-      <div class="card">
-        <div class="row">
-          <div class="h1">Startup Feed</div>
-          <span class="badge"><span id="count">0</span> Posts</span>
+      <section class="section-head">
+        <div>
+          <h3>Startup Feed</h3>
+          <p>Fresh ideas from your network</p>
         </div>
+        <span class="pill"><span id="count">0</span> posts</span>
+      </section>
 
-        <div class="hr"></div>
+      <section id="ideasList" class="feed-list"></section>
 
-        <div id="ideasList"></div>
-      </div>
-    </div>
+    </main>
 
-    <div class="footer">Developed by Kshiprant</div>
+    <nav class="bottom-nav">
+      <a class="nav-item active" href="/home.html">
+        <span>🏠</span>
+        <small>Home</small>
+      </a>
+      <a class="nav-item" href="/ideas.html">
+        <span>💡</span>
+        <small>Ideas</small>
+      </a>
+      <a class="nav-item" href="/people.html">
+        <span>👥</span>
+        <small>People</small>
+      </a>
+      <a class="nav-item" href="/messages.html">
+        <span>💬</span>
+        <small>Messages</small>
+      </a>
+      <a class="nav-item" href="/profile.html">
+        <span>👤</span>
+        <small>Profile</small>
+      </a>
+    </nav>
+
   </div>
 
-  <script type="module" src="auth.js?v=1"></script>
-  <script type="module" src="home.js"></script>
+  <script>
+    function logout() {
+      localStorage.removeItem("skillfeed_logged_in");
+      window.location.href = "/index.html";
+    }
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/service-worker.js").catch(console.error);
+      });
+    }
+  </script>
+
+  <script src="home.js"></script>
 </body>
 </html>
