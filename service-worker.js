@@ -1,27 +1,15 @@
-const CACHE_NAME = "skillfeed-v1";
-const urlsToCache = [
-  "/",
-  "/home.html",
-  "/ideas.html",
-  "/people.html",
-  "/profile.html",
-  "/messages.html",
-  "/style.css",
-  "/home.js",
-  "/ideas.js",
-  "/people.js",
-  "/profile.js",
-  "/manifest.json"
-];
+self.addEventListener("install", () => {
+  self.skipWaiting();
+});
 
-self.addEventListener("install", (event) => {
+self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
+    caches.keys().then((keys) =>
+      Promise.all(keys.map((key) => caches.delete(key)))
+    ).then(() => self.clients.claim())
   );
 });
 
 self.addEventListener("fetch", (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => response || fetch(event.request))
-  );
+  event.respondWith(fetch(event.request));
 });
