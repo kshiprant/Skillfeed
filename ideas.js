@@ -11,9 +11,13 @@ const status = document.getElementById("status");
 const ideasList = document.getElementById("ideasList");
 const count = document.getElementById("count");
 
-function setStatus(t){ status.textContent = t; }
+function setStatus(t){
+  if (status) status.textContent = t;
+}
 
+if (postIdeaBtn) {
 postIdeaBtn.addEventListener("click", async () => {
+
   const user = auth.currentUser;
   if (!user) {
     setStatus("❌ Please login again.");
@@ -32,6 +36,7 @@ postIdeaBtn.addEventListener("click", async () => {
   setStatus("Posting...");
 
   try {
+
     await addDoc(collection(db, "ideas"), {
       title,
       desc,
@@ -42,6 +47,7 @@ postIdeaBtn.addEventListener("click", async () => {
 
     ideaTitle.value = "";
     ideaDesc.value = "";
+
     setStatus("✅ Idea posted!");
     setTimeout(() => setStatus(""), 1200);
 
@@ -49,13 +55,18 @@ postIdeaBtn.addEventListener("click", async () => {
     console.error(e);
     setStatus("❌ " + (e.message || e));
   }
+
 });
+}
 
 // Live list of ideas
 const q = query(collection(db, "ideas"), orderBy("createdAt", "desc"));
 
 onSnapshot(q, (snap) => {
-  count.textContent = snap.size;
+
+  if (count) count.textContent = snap.size;
+
+  if (!ideasList) return;
 
   if (snap.empty) {
     ideasList.innerHTML = `<div class="card">No ideas yet. Post the first one.</div>`;
@@ -63,11 +74,13 @@ onSnapshot(q, (snap) => {
   }
 
   ideasList.innerHTML = "";
+
   snap.forEach((d) => {
+
     const idea = d.data();
 
     const div = document.createElement("div");
-    div.className = "person"; // reuse existing card style
+    div.className = "person";
 
     div.innerHTML = `
       <h3>${idea.title || "Untitled"} <span class="badge">Idea</span></h3>
@@ -78,5 +91,7 @@ onSnapshot(q, (snap) => {
     `;
 
     ideasList.appendChild(div);
+
   });
+
 });
