@@ -1,6 +1,3 @@
-import { db } from "./firebase.js";
-import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
 const list = document.getElementById("list");
 const status = document.getElementById("status");
 const count = document.getElementById("count");
@@ -38,28 +35,21 @@ function renderUsers(users) {
   });
 }
 
-(async function loadPeople() {
+(function loadPeople() {
   setStatus("Loading people...");
 
   try {
-    const q = query(collection(db, "users"), orderBy("updatedAt", "desc"));
-    const snap = await getDocs(q);
+    allUsers = JSON.parse(localStorage.getItem("skillfeed_users") || "[]");
 
-    if (count) count.textContent = snap.size;
+    if (count) count.textContent = allUsers.length;
 
-    if (snap.empty) {
+    if (allUsers.length === 0) {
       setStatus("No profiles yet. Create yours first.");
       if (list) list.innerHTML = `<div class="card">No users found.</div>`;
       return;
     }
 
     setStatus("");
-
-    allUsers = [];
-    snap.forEach((docu) => {
-      allUsers.push(docu.data());
-    });
-
     renderUsers(allUsers);
   } catch (e) {
     console.error(e);
@@ -67,14 +57,15 @@ function renderUsers(users) {
   }
 })();
 
-/* -------- SEARCH FILTER -------- */
-
 if (searchUser) {
   searchUser.addEventListener("input", () => {
     const queryText = searchUser.value.toLowerCase().trim();
 
     const filtered = allUsers.filter((user) =>
-      (user.username || "").toLowerCase().includes(queryText)
+      (user.username || "").toLowerCase().includes(queryText) ||
+      (user.name || "").toLowerCase().includes(queryText) ||
+      (user.skills || "").toLowerCase().includes(queryText) ||
+      (user.startup || "").toLowerCase().includes(queryText)
     );
 
     renderUsers(filtered);
