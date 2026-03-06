@@ -1,3 +1,11 @@
+import { auth, db } from "./firebase.js";
+import {
+  doc,
+  getDoc,
+  setDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const profileView = document.getElementById("profile-view");
   const profileEdit = document.getElementById("profile-edit");
@@ -21,25 +29,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const profileInterest = document.getElementById("profile-interest");
   const profileAvatar = document.getElementById("profile-avatar");
 
-  function getProfileData() {
-    return {
-      name: localStorage.getItem("sf_name") || "",
-      skills: localStorage.getItem("sf_skills") || "",
-      location: localStorage.getItem("sf_location") || "",
-      interest: localStorage.getItem("sf_interest") || "",
-      bio: localStorage.getItem("sf_bio") || "",
-      level: localStorage.getItem("sf_level") || "Level 1 - Learner"
-    };
-  }
-
-  function saveProfileData(data) {
-    localStorage.setItem("sf_name", data.name);
-    localStorage.setItem("sf_skills", data.skills);
-    localStorage.setItem("sf_location", data.location);
-    localStorage.setItem("sf_interest", data.interest);
-    localStorage.setItem("sf_bio", data.bio);
-    localStorage.setItem("sf_level", data.level);
-  }
+  let currentUser = null;
+  let currentProfileData = {
+    name: "",
+    username: "",
+    skills: "",
+    location: "",
+    interest: "",
+    bio: "",
+    level: "Level 1 - Learner"
+  };
 
   function createTag(text) {
     const span = document.createElement("span");
@@ -48,9 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return span;
   }
 
-  function renderProfile() {
-    const data = getProfileData();
-
+  function renderProfile(data) {
     profileName.textContent = data.name || "Your Name";
     profileLocation.textContent = data.location || "Your Location";
     profileLevel.textContent = data.level || "Level 1 - Learner";
@@ -61,8 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
     profileAvatar.textContent = firstLetter || "S";
 
     profileSkills.innerHTML = "";
-    if (data.skills.trim()) {
-      data.skills.split(",").forEach(skill => {
+    if ((data.skills || "").trim()) {
+      data.skills.split(",").forEach((skill) => {
         if (skill.trim()) {
           profileSkills.appendChild(createTag(skill));
         }
@@ -71,46 +68,110 @@ document.addEventListener("DOMContentLoaded", () => {
       profileSkills.innerHTML = `<p class="empty-text">No skills added yet.</p>`;
     }
 
-    nameInput.value = data.name;
-    skillsInput.value = data.skills;
-    locationInput.value = data.location;
-    interestInput.value = data.interest;
-    bioInput.value = data.bio;
-    levelInput.value = data.level;
+    nameInput.value = data.name || "";
+    skillsInput.value = data.skills || "";
+    locationInput.value = data.location || "";
+    interestInput.value = data.interest || "";
+    bioInput.value = data.bio || "";
+    levelInput.value = data.level || "Level 1 - Learner";
   }
 
   function showEditMode() {
-    profileView.style.display = "none";
-    profileEdit.style.display = "block";
+    if (profileView) profileView.style.display = "none";
+    if (profileEdit) profileEdit.style.display = "block";
   }
 
   function showViewMode() {
-    profileView.style.display = "block";
-    profileEdit.style.display = "none";
+    if (profileView) profileView.style.display = "block";
+    if (profileEdit) profileEdit.style.display = "none";
   }
 
-  editBtn.addEventListener("click", showEditMode);
+  async function loadProfile() {
+    if (!currentUser) return;
 
-  cancelBtn.addEventListener("click", () => {
-    renderProfile();
-    showViewMode();
-  });
+    try {
+      const userRef = doc(db, "users", currentUser.uid);
+      const snap = await getDoc(userRef);
 
-  saveBtn.addEventListener("click", () => {
+      if (snap.exists()) {
+        const data = snap.data();
+        currentProfileData = {
+          name: data.name || "",
+          username: data.username || "",
+          skills: data.skills || "",
+          location: data.location || "",
+          interest: data.interest || data.startup || "",
+          bio: data.bio || "",
+          level: data.level || "Level 1 - Learner"
+        };
+      } else {
+        currentProfileData = {
+          name: "",
+          username: currentUser.email ? currentUser.email.split("@")[0] : "",
+          skills: "",
+          location: "",
+          interest: "",
+          bio: "",
+          level: "Level 1 - Learner"
+        };
+      }
+
+      renderProfile(currentProfileData);
+      showViewMode();
+    } catch (e) {
+      console.error("Load profile error:", e);
+    }
+  }
+
+  async function saveProfile() {
+    if (!currentUser) return;
+
     const data = {
       name: nameInput.value.trim(),
+      username: currentUser.email ? currentUser.email.split("@")[0] : currentUser.uid,
       skills: skillsInput.value.trim(),
       location: locationInput.value.trim(),
       interest: interestInput.value.trim(),
+      startup: interestInput.value.trim(),
       bio: bioInput.value.trim(),
-      level: levelInput.value
+      level: levelInput.value,
+      email: currentUser.email || "",
+      updatedAt: serverTimestamp()
     };
 
-    saveProfileData(data);
-    renderProfile();
-    showViewMode();
-  });
+    try {
+      await setDoc(doc(db, "users", currentUser.uid), data, { merge: true });
+      currentProfileData = data;
+      renderProfile(currentProfileData);
+      showViewMode();
+    } catch (e) {
+      console.error("Save profile error:", e);
+      alert("❌ Failed to save profile.");
+    }
+  }
 
-  renderProfile();
-  showViewMode();
+  if (editBtn) {
+    editBtn.addEventListener("click", showEditMode);
+  }
+
+  if (cancelBtn) {
+    cancelBtn.addEventListener("click", () => {
+      renderProfile(currentProfileData);
+      showViewMode();
+    });
+  }
+
+  if (saveBtn) {
+    saveBtn.addEventListener("click", saveProfile);
+  }
+
+  auth.onAuthStateChanged((user) => {
+    if (!user) {
+      window.location.href = "/index.html";
+      return;
+    }
+
+    currentUser = user;
+    loadProfile();
+  });
 });
