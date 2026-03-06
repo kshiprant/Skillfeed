@@ -30,7 +30,7 @@
           <div>
             <div class="h1">Welcome to Skillfeed</div>
             <div class="small" style="text-align:left;">
-              Build startups with the right people. Create your profile to appear on Find People.
+              Build startups with the right people. Post your idea directly from here and find the right people to build with.
             </div>
           </div>
           <span class="badge">Level system ready</span>
@@ -38,10 +38,12 @@
 
         <div class="hr"></div>
 
-        <div class="grid">
-          <button class="btn" type="button" onclick="window.location.href='/create-profile.html'">
-            Create / Update Profile
-          </button>
+        <div class="grid" style="margin-top:12px;">
+          <input id="homeIdeaTitle" placeholder="Idea title (e.g. AI Fitness Coach)">
+          <textarea id="homeIdeaDesc" placeholder="Describe your idea and who you need..."></textarea>
+          <button class="btn" id="homePostIdeaBtn" type="button">Post Idea</button>
+          <div class="status" id="homeStatus"></div>
+
           <button class="btn secondary" type="button" onclick="window.location.href='/people.html'">
             Explore People
           </button>
