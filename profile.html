@@ -6,7 +6,7 @@
   <title>Skillfeed | Profile</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body data-protected="1">
   <div class="phone">
     
     <div class="topbar">
@@ -15,12 +15,12 @@
     </div>
 
     <div class="nav">
-      <a href="index.html">Home</a>
-      <a href="ideas.html">Ideas</a>
-      <a href="find.html">Find People</a>
-      <a href="messages.html">Messages</a>
-      <a href="profile.html" class="active">Profile</a>
-      <button onclick="logout()">Logout</button>
+      <a href="/home.html">Home</a>
+      <a href="/ideas.html">Ideas</a>
+      <a href="/people.html">Find People</a>
+      <a href="/messages.html">Messages</a>
+      <a href="/profile.html" class="active">Profile</a>
+      <button type="button" onclick="logout()">Logout</button>
     </div>
 
     <div class="main">
@@ -83,18 +83,44 @@
           </div>
         </div>
 
+        <!-- CONNECTION REQUESTS -->
+        <div class="card" style="margin-top:12px;">
+          <div class="row">
+            <div class="h1" style="margin:0;">Connection Requests</div>
+            <span class="badge" id="reqCount">0</span>
+          </div>
+          <div class="hr"></div>
+          <div id="requestList"></div>
+        </div>
+
+        <!-- MY CONNECTIONS -->
+        <div class="card" style="margin-top:12px;">
+          <div class="row">
+            <div class="h1" style="margin:0;">My Connections</div>
+            <span class="badge" id="connCount">0</span>
+          </div>
+          <div class="hr"></div>
+          <div id="connectionsList"></div>
+        </div>
+
+        <!-- NOTIFICATIONS -->
+        <div class="card" style="margin-top:12px;">
+          <div class="row">
+            <div class="h1" style="margin:0;">Notifications</div>
+            <span class="badge" id="notifCount">0</span>
+          </div>
+          <div class="hr"></div>
+          <div id="notificationsList"></div>
+        </div>
+
       </section>
     </div>
 
     <div class="footer">Developed by Kshiprant</div>
   </div>
 
+  <script type="module" src="auth.js?v=1"></script>
   <script src="profile.js"></script>
-  <script>
-    function logout() {
-      localStorage.removeItem("skillfeed_logged_in");
-      window.location.href = "index.html";
-    }
-  </script>
+  <script type="module" src="profile-social.js"></script>
 </body>
 </html>
