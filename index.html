@@ -1,58 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Skillfeed | Login</title>
-
-<link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skillfeed | Login</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#2563eb" />
 </head>
-
 <body>
+  <div class="app-shell">
 
-<div class="phone">
+    <header class="app-header">
+      <div>
+        <h1 class="brand-title">Skillfeed</h1>
+        <p class="brand-sub">Build startups with the right people.</p>
+      </div>
+    </header>
 
-  <div class="topbar">
-    <div class="brand">Skillfeed</div>
-    <div class="sub">Build startups with the right people.</div>
+    <main class="app-main">
+
+      <section class="hero-card" style="margin-top: 18px;">
+        <div class="hero-top">
+          <div>
+            <h2>Login</h2>
+            <p>Access your network, ideas, and profile.</p>
+          </div>
+          <span class="pill">Welcome</span>
+        </div>
+
+        <div class="form-stack">
+          <input id="email" type="email" placeholder="Email" autocomplete="email" />
+          <input id="password" type="password" placeholder="Password" autocomplete="current-password" />
+          <button id="loginBtn" class="primary-btn" type="button">Login</button>
+          <button id="signupBtn" class="secondary-btn" type="button">Create new account</button>
+          <div id="status" class="status-text"></div>
+        </div>
+      </section>
+
+      <section class="hero-card">
+        <div class="hero-top">
+          <div>
+            <h2>Why Skillfeed?</h2>
+            <p>Find startup ideas, collaborators, and builders in one place.</p>
+          </div>
+          <span class="pill">MVP</span>
+        </div>
+
+        <div class="tags-wrap">
+          <span class="tag">Ideas</span>
+          <span class="tag">Builders</span>
+          <span class="tag">Profiles</span>
+          <span class="tag">Collaboration</span>
+        </div>
+      </section>
+
+      <div class="footer">Developed by Kshiprant</div>
+
+    </main>
+
   </div>
 
-  <div class="main">
-
-    <div class="h1">Login</div>
-
-    <div class="card grid">
-
-      <input id="email" placeholder="Email" type="email" autocomplete="email">
-
-      <input id="password" placeholder="Password" type="password" autocomplete="current-password">
-
-      <button class="btn" id="loginBtn" type="button">
-        Login
-      </button>
-
-      <button class="btn secondary" type="button"
-        onclick="window.location.href='/register.html'">
-        Create new account
-      </button>
-
-      <div class="status" id="status"></div>
-
-    </div>
-
-  </div>
-
-  <!-- Footer -->
-  <div class="footer">
-    Developed by Kshiprant
-  </div>
-
-</div>
-
-<script type="module" src="login.js?v=1"></script>
-
+  <script src="auth.js"></script>
 </body>
 </html>
