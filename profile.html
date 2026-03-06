@@ -5,72 +5,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Skillfeed | Profile</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#2563eb" />
 </head>
-<body data-protected="1">
-  <div class="phone">
-    
-    <div class="topbar">
-      <div class="brand">Skillfeed</div>
-      <div class="sub">Your public profile.</div>
-    </div>
+<body>
+  <div class="app-shell">
 
-    <div class="nav">
-      <a href="/home.html">Home</a>
-      <a href="/ideas.html">Ideas</a>
-      <a href="/people.html">Find People</a>
-      <a href="/messages.html">Messages</a>
-      <a href="/profile.html" class="active">Profile</a>
-      <button type="button" onclick="logout()">Logout</button>
-    </div>
+    <header class="app-header">
+      <div>
+        <h1 class="brand-title">Skillfeed</h1>
+        <p class="brand-sub">Your public profile.</p>
+      </div>
+      <button class="ghost-btn" onclick="logout()">Logout</button>
+    </header>
 
-    <div class="main">
-      <div class="h1">Your Profile</div>
+    <main class="app-main">
 
-      <section class="profile-page">
+      <section class="section-head" style="margin-top: 4px;">
+        <div>
+          <h3>Your Profile</h3>
+          <p>Show builders who you are and what you can do</p>
+        </div>
+        <span class="pill">Profile</span>
+      </section>
 
-        <!-- VIEW MODE -->
-        <div id="profile-view" class="profile-card">
-          <div class="profile-header">
-            <div class="profile-avatar" id="profile-avatar">S</div>
+      <section class="hero-card" id="profile-view">
+        <div class="profile-header">
+          <div class="profile-avatar" id="profile-avatar">S</div>
 
-            <div class="profile-meta">
-              <h2 id="profile-name">Your Name</h2>
-              <p id="profile-location">Your Location</p>
-              <span id="profile-level" class="level-badge">Level 1 - Learner</span>
-            </div>
+          <div class="profile-meta">
+            <h2 id="profile-name">Your Name</h2>
+            <p id="profile-location">Your Location</p>
+            <span id="profile-level" class="level-badge">Level 1 - Learner</span>
           </div>
-
-          <div class="profile-section">
-            <h3>Bio</h3>
-            <p id="profile-bio">Add a short bio to tell people what you do.</p>
-          </div>
-
-          <div class="profile-section">
-            <h3>Skills</h3>
-            <div id="profile-skills" class="tags-wrap">
-              <p class="empty-text">No skills added yet.</p>
-            </div>
-          </div>
-
-          <div class="profile-section">
-            <h3>Startup Interest</h3>
-            <p id="profile-interest">No startup interest added yet.</p>
-          </div>
-
-          <button id="edit-btn" class="btn">Edit Profile</button>
         </div>
 
-        <!-- EDIT MODE -->
-        <div id="profile-edit" class="profile-card" style="display:none;">
-          <h2>Edit Profile</h2>
+        <div class="profile-section">
+          <h3>Bio</h3>
+          <p id="profile-bio">Add a short bio to tell people what you do.</p>
+        </div>
 
+        <div class="profile-section">
+          <h3>Skills</h3>
+          <div id="profile-skills" class="tags-wrap">
+            <p class="empty-text">No skills added yet.</p>
+          </div>
+        </div>
+
+        <div class="profile-section">
+          <h3>Startup Interest</h3>
+          <p id="profile-interest">No startup interest added yet.</p>
+        </div>
+
+        <button id="edit-btn" class="primary-btn" type="button">Edit Profile</button>
+      </section>
+
+      <section class="hero-card" id="profile-edit" style="display:none;">
+        <div class="hero-top">
+          <div>
+            <h2>Edit Profile</h2>
+            <p>Update your identity, skills, and startup direction.</p>
+          </div>
+          <span class="pill">Edit</span>
+        </div>
+
+        <div class="form-stack">
           <input id="name" type="text" placeholder="Your Name" />
           <input id="skills" type="text" placeholder="Your Skills (e.g. React, AI, Marketing)" />
           <input id="location" type="text" placeholder="Location (City, Country)" />
           <input id="interest" type="text" placeholder="Startup Interest (e.g. SaaS, AI, FinTech)" />
           <textarea id="bio" placeholder="Short bio"></textarea>
 
-          <select id="level">
+          <select id="level" class="profile-select">
             <option>Level 1 - Learner</option>
             <option>Level 2 - Builder</option>
             <option>Level 3 - Collaborator</option>
@@ -78,49 +84,69 @@
           </select>
 
           <div class="profile-actions">
-            <button id="cancel-btn" class="btn secondary">Cancel</button>
-            <button id="save-profile-btn" class="btn">Save Profile</button>
+            <button id="cancel-btn" class="secondary-btn" type="button">Cancel</button>
+            <button id="save-profile-btn" class="primary-btn" type="button">Save Profile</button>
           </div>
         </div>
-
-        <!-- CONNECTION REQUESTS -->
-        <div class="card" style="margin-top:12px;">
-          <div class="row">
-            <div class="h1" style="margin:0;">Connection Requests</div>
-            <span class="badge" id="reqCount">0</span>
-          </div>
-          <div class="hr"></div>
-          <div id="requestList"></div>
-        </div>
-
-        <!-- MY CONNECTIONS -->
-        <div class="card" style="margin-top:12px;">
-          <div class="row">
-            <div class="h1" style="margin:0;">My Connections</div>
-            <span class="badge" id="connCount">0</span>
-          </div>
-          <div class="hr"></div>
-          <div id="connectionsList"></div>
-        </div>
-
-        <!-- NOTIFICATIONS -->
-        <div class="card" style="margin-top:12px;">
-          <div class="row">
-            <div class="h1" style="margin:0;">Notifications</div>
-            <span class="badge" id="notifCount">0</span>
-          </div>
-          <div class="hr"></div>
-          <div id="notificationsList"></div>
-        </div>
-
       </section>
-    </div>
 
-    <div class="footer">Developed by Kshiprant</div>
+      <section class="hero-card">
+        <div class="hero-top">
+          <div>
+            <h2>What makes a strong profile?</h2>
+            <p>Add clear skills, a focused startup interest, and a sharp bio.</p>
+          </div>
+          <span class="pill">Tips</span>
+        </div>
+
+        <div class="tags-wrap">
+          <span class="tag">Clear Skills</span>
+          <span class="tag">Strong Bio</span>
+          <span class="tag">Startup Focus</span>
+          <span class="tag">Credible Identity</span>
+        </div>
+      </section>
+
+    </main>
+
+    <nav class="bottom-nav">
+      <a class="nav-item" href="/home.html">
+        <span>🏠</span>
+        <small>Home</small>
+      </a>
+      <a class="nav-item" href="/ideas.html">
+        <span>💡</span>
+        <small>Ideas</small>
+      </a>
+      <a class="nav-item" href="/people.html">
+        <span>👥</span>
+        <small>People</small>
+      </a>
+      <a class="nav-item" href="/messages.html">
+        <span>💬</span>
+        <small>Messages</small>
+      </a>
+      <a class="nav-item active" href="/profile.html">
+        <span>👤</span>
+        <small>Profile</small>
+      </a>
+    </nav>
+
   </div>
 
-  <script type="module" src="auth.js?v=1"></script>
-  <script type="module" src="profile.js"></script>
-  <script type="module" src="profile-social.js"></script>
+  <script>
+    function logout() {
+      localStorage.removeItem("skillfeed_logged_in");
+      window.location.href = "/index.html";
+    }
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/service-worker.js").catch(console.error);
+      });
+    }
+  </script>
+
+  <script src="profile.js"></script>
 </body>
 </html>
