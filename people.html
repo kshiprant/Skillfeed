@@ -1,60 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Skillfeed | Find People</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#2563eb" />
 </head>
 
-<body data-protected="1">
+<body>
+  <div class="app-shell">
 
-<div class="phone">
+    <header class="app-header">
+      <div>
+        <h1 class="brand-title">Skillfeed</h1>
+        <p class="brand-sub">Discover builders nearby and worldwide.</p>
+      </div>
+      <button class="ghost-btn" onclick="logout()">Logout</button>
+    </header>
 
-  <div class="topbar">
-    <div class="brand">Skillfeed</div>
-    <div class="sub">Discover builders nearby (and worldwide).</div>
+    <main class="app-main">
+
+      <section class="section-head" style="margin-top: 4px;">
+        <div>
+          <h3>Find People</h3>
+          <p>Search creators, builders, and collaborators</p>
+        </div>
+        <span class="pill"><span id="count">0</span> users</span>
+      </section>
+
+      <section class="hero-card" style="margin-bottom: 16px;">
+        <div class="hero-top">
+          <div>
+            <h2>Search by username</h2>
+            <p>Quickly find people by username, name, skills, or startup interest.</p>
+          </div>
+          <span class="pill">People</span>
+        </div>
+
+        <div class="form-stack">
+          <input
+            id="searchUser"
+            type="text"
+            placeholder="Search by username..."
+          />
+          <div class="status-text" id="status"></div>
+        </div>
+      </section>
+
+      <section class="feed-list" id="list"></section>
+
+    </main>
+
+    <nav class="bottom-nav">
+      <a class="nav-item" href="/home.html">
+        <span>🏠</span>
+        <small>Home</small>
+      </a>
+      <a class="nav-item" href="/ideas.html">
+        <span>💡</span>
+        <small>Ideas</small>
+      </a>
+      <a class="nav-item active" href="/people.html">
+        <span>👥</span>
+        <small>People</small>
+      </a>
+      <a class="nav-item" href="/messages.html">
+        <span>💬</span>
+        <small>Messages</small>
+      </a>
+      <a class="nav-item" href="/profile.html">
+        <span>👤</span>
+        <small>Profile</small>
+      </a>
+    </nav>
+
   </div>
 
-  <div class="nav">
-    <a href="/home.html">Home</a>
-    <a href="/ideas.html">Ideas</a>
-    <a class="active" href="/people.html">Find People</a>
-    <a href="/messages.html">Messages</a>
-    <a href="/profile.html">Profile</a>
-    <button type="button" onclick="logout()">Logout</button>
-  </div>
+  <script>
+    function logout() {
+      localStorage.removeItem("skillfeed_logged_in");
+      window.location.href = "/index.html";
+    }
 
-  <div class="main">
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/service-worker.js").catch(console.error);
+      });
+    }
+  </script>
 
-    <div class="row">
-      <div class="h1" style="margin:0;">People</div>
-      <span class="badge" id="count">0</span>
-    </div>
-
-    <div class="card" style="margin-top:12px; margin-bottom:12px;">
-      <input
-        id="searchUser"
-        type="text"
-        placeholder="Search by username..."
-        style="width:100%; padding:12px; border-radius:10px; border:1px solid #ddd;">
-    </div>
-
-    <div class="status" id="status"></div>
-
-    <div class="list" id="list"></div>
-
-  </div>
-
-  <div class="footer">
-    Developed by Kshiprant
-  </div>
-
-</div>
-
-<script type="module" src="auth.js?v=1"></script>
-<script type="module" src="people.js?v=1"></script>
-
+  <script src="people.js"></script>
 </body>
 </html>
