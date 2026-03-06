@@ -27,21 +27,24 @@
 
   <div class="main">
 
-    <div class="row">
-      <div class="h1" style="margin:0;">Startup Ideas</div>
-      <span class="badge" id="count">0</span>
-    </div>
-
     <div class="card grid" style="margin-top:10px;">
+      <div class="h1" style="margin:0;">Post a Startup Idea</div>
       <input id="ideaTitle" placeholder="Idea title (e.g. AI Fitness Coach)">
       <textarea id="ideaDesc" placeholder="Describe your idea and who you need..."></textarea>
       <button class="btn" id="postIdeaBtn" type="button">Post New Idea</button>
       <div class="status" id="status"></div>
     </div>
 
-    <div class="hr"></div>
+    <div class="card" style="margin-top:12px;">
+      <div class="row">
+        <div class="h1" style="margin:0;">Posted Ideas</div>
+        <span class="badge"><span id="count">0</span> Posts</span>
+      </div>
 
-    <div class="list" id="ideasList"></div>
+      <div class="hr"></div>
+
+      <div class="list" id="ideasList"></div>
+    </div>
 
   </div>
 
