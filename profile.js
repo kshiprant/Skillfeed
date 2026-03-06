@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const profileBio = document.getElementById("profile-bio");
   const profileSkills = document.getElementById("profile-skills");
   const profileInterest = document.getElementById("profile-interest");
+  const profileAvatar = document.getElementById("profile-avatar");
 
   function getProfileData() {
     return {
@@ -54,6 +55,10 @@ document.addEventListener("DOMContentLoaded", () => {
     profileLocation.textContent = data.location || "Your Location";
     profileLevel.textContent = data.level || "Level 1 - Learner";
     profileBio.textContent = data.bio || "Add a short bio to tell people what you do.";
+    profileInterest.textContent = data.interest || "No startup interest added yet.";
+
+    const firstLetter = (data.name || "S").trim().charAt(0).toUpperCase();
+    profileAvatar.textContent = firstLetter || "S";
 
     profileSkills.innerHTML = "";
     if (data.skills.trim()) {
@@ -63,10 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     } else {
-      profileSkills.innerHTML = "<p class='empty-text'>No skills added yet.</p>";
+      profileSkills.innerHTML = `<p class="empty-text">No skills added yet.</p>`;
     }
-
-    profileInterest.textContent = data.interest || "No startup interest added yet.";
 
     nameInput.value = data.name;
     skillsInput.value = data.skills;
@@ -86,33 +89,27 @@ document.addEventListener("DOMContentLoaded", () => {
     profileEdit.style.display = "none";
   }
 
-  if (editBtn) {
-    editBtn.addEventListener("click", showEditMode);
-  }
+  editBtn.addEventListener("click", showEditMode);
 
-  if (cancelBtn) {
-    cancelBtn.addEventListener("click", () => {
-      renderProfile();
-      showViewMode();
-    });
-  }
+  cancelBtn.addEventListener("click", () => {
+    renderProfile();
+    showViewMode();
+  });
 
-  if (saveBtn) {
-    saveBtn.addEventListener("click", () => {
-      const data = {
-        name: nameInput.value.trim(),
-        skills: skillsInput.value.trim(),
-        location: locationInput.value.trim(),
-        interest: interestInput.value.trim(),
-        bio: bioInput.value.trim(),
-        level: levelInput.value
-      };
+  saveBtn.addEventListener("click", () => {
+    const data = {
+      name: nameInput.value.trim(),
+      skills: skillsInput.value.trim(),
+      location: locationInput.value.trim(),
+      interest: interestInput.value.trim(),
+      bio: bioInput.value.trim(),
+      level: levelInput.value
+    };
 
-      saveProfileData(data);
-      renderProfile();
-      showViewMode();
-    });
-  }
+    saveProfileData(data);
+    renderProfile();
+    showViewMode();
+  });
 
   renderProfile();
   showViewMode();
