@@ -1,44 +1,119 @@
-<div class="profile-container">
+document.addEventListener("DOMContentLoaded", () => {
+  const profileView = document.getElementById("profile-view");
+  const profileEdit = document.getElementById("profile-edit");
 
-  <div id="profile-view">
+  const editBtn = document.getElementById("edit-btn");
+  const cancelBtn = document.getElementById("cancel-btn");
+  const saveBtn = document.getElementById("save-profile-btn");
 
-    <div class="avatar"></div>
+  const nameInput = document.getElementById("name");
+  const skillsInput = document.getElementById("skills");
+  const locationInput = document.getElementById("location");
+  const interestInput = document.getElementById("interest");
+  const bioInput = document.getElementById("bio");
+  const levelInput = document.getElementById("level");
 
-    <h2 id="profile-name"></h2>
-    <p id="profile-location"></p>
-    <span id="profile-level"></span>
+  const profileName = document.getElementById("profile-name");
+  const profileLocation = document.getElementById("profile-location");
+  const profileLevel = document.getElementById("profile-level");
+  const profileBio = document.getElementById("profile-bio");
+  const profileSkills = document.getElementById("profile-skills");
+  const profileInterest = document.getElementById("profile-interest");
 
-    <p id="profile-bio"></p>
+  function getProfileData() {
+    return {
+      name: localStorage.getItem("sf_name") || "",
+      skills: localStorage.getItem("sf_skills") || "",
+      location: localStorage.getItem("sf_location") || "",
+      interest: localStorage.getItem("sf_interest") || "",
+      bio: localStorage.getItem("sf_bio") || "",
+      level: localStorage.getItem("sf_level") || "Level 1 - Learner"
+    };
+  }
 
-    <div id="profile-skills"></div>
+  function saveProfileData(data) {
+    localStorage.setItem("sf_name", data.name);
+    localStorage.setItem("sf_skills", data.skills);
+    localStorage.setItem("sf_location", data.location);
+    localStorage.setItem("sf_interest", data.interest);
+    localStorage.setItem("sf_bio", data.bio);
+    localStorage.setItem("sf_level", data.level);
+  }
 
-    <div id="profile-interest"></div>
+  function createTag(text) {
+    const span = document.createElement("span");
+    span.className = "tag";
+    span.textContent = text.trim();
+    return span;
+  }
 
-    <button id="editBtn">Edit Profile</button>
+  function renderProfile() {
+    const data = getProfileData();
 
-  </div>
+    profileName.textContent = data.name || "Your Name";
+    profileLocation.textContent = data.location || "Your Location";
+    profileLevel.textContent = data.level || "Level 1 - Learner";
+    profileBio.textContent = data.bio || "Add a short bio to tell people what you do.";
 
+    profileSkills.innerHTML = "";
+    if (data.skills.trim()) {
+      data.skills.split(",").forEach(skill => {
+        if (skill.trim()) {
+          profileSkills.appendChild(createTag(skill));
+        }
+      });
+    } else {
+      profileSkills.innerHTML = "<p class='empty-text'>No skills added yet.</p>";
+    }
 
-  <div id="profile-edit" style="display:none;">
+    profileInterest.textContent = data.interest || "No startup interest added yet.";
 
-    <input id="name" placeholder="Your Name">
+    nameInput.value = data.name;
+    skillsInput.value = data.skills;
+    locationInput.value = data.location;
+    interestInput.value = data.interest;
+    bioInput.value = data.bio;
+    levelInput.value = data.level;
+  }
 
-    <input id="skills" placeholder="Skills">
+  function showEditMode() {
+    profileView.style.display = "none";
+    profileEdit.style.display = "block";
+  }
 
-    <input id="location" placeholder="Location">
+  function showViewMode() {
+    profileView.style.display = "block";
+    profileEdit.style.display = "none";
+  }
 
-    <input id="interest" placeholder="Startup Interest">
+  if (editBtn) {
+    editBtn.addEventListener("click", showEditMode);
+  }
 
-    <textarea id="bio" placeholder="Bio"></textarea>
+  if (cancelBtn) {
+    cancelBtn.addEventListener("click", () => {
+      renderProfile();
+      showViewMode();
+    });
+  }
 
-    <select id="level">
-      <option>Level 1 - Learner</option>
-      <option>Level 2 - Builder</option>
-      <option>Level 3 - Founder</option>
-    </select>
+  if (saveBtn) {
+    saveBtn.addEventListener("click", () => {
+      const data = {
+        name: nameInput.value.trim(),
+        skills: skillsInput.value.trim(),
+        location: locationInput.value.trim(),
+        interest: interestInput.value.trim(),
+        bio: bioInput.value.trim(),
+        level: levelInput.value
+      };
 
-    <button id="saveProfile">Save</button>
+      saveProfileData(data);
+      renderProfile();
+      showViewMode();
+    });
+  }
 
-  </div>
-
-</div>
+  renderProfile();
+  showViewMode();
+});
