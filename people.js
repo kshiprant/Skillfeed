@@ -8,23 +8,21 @@ const searchUser = document.getElementById("searchUser");
 
 let allUsers = [];
 
-function setStatus(t){
+function setStatus(t) {
   if (status) status.textContent = t;
 }
 
-function renderUsers(users){
-
+function renderUsers(users) {
   if (!list) return;
 
-  if (users.length === 0){
+  if (users.length === 0) {
     list.innerHTML = `<div class="card">No users found.</div>`;
     return;
   }
 
   list.innerHTML = "";
 
-  users.forEach(p => {
-
+  users.forEach((p) => {
     const div = document.createElement("div");
     div.className = "person";
 
@@ -37,61 +35,48 @@ function renderUsers(users){
     `;
 
     list.appendChild(div);
-
   });
-
 }
 
-(async function loadPeople(){
-
+(async function loadPeople() {
   setStatus("Loading people...");
 
-  try{
-
+  try {
     const q = query(collection(db, "users"), orderBy("updatedAt", "desc"));
     const snap = await getDocs(q);
 
     if (count) count.textContent = snap.size;
 
-    if (snap.empty){
+    if (snap.empty) {
       setStatus("No profiles yet. Create yours first.");
-      list.innerHTML = `<div class="card">No users found.</div>`;
+      if (list) list.innerHTML = `<div class="card">No users found.</div>`;
       return;
     }
 
     setStatus("");
 
     allUsers = [];
-
-    snap.forEach(docu => {
+    snap.forEach((docu) => {
       allUsers.push(docu.data());
     });
 
     renderUsers(allUsers);
-
-  }catch(e){
-
+  } catch (e) {
     console.error(e);
     setStatus("❌ " + (e.message || e));
-
   }
-
 })();
 
 /* -------- SEARCH FILTER -------- */
 
-if (searchUser){
+if (searchUser) {
+  searchUser.addEventListener("input", () => {
+    const queryText = searchUser.value.toLowerCase().trim();
 
-  searchUser.addEventListener("input", ()=>{
-
-    const query = searchUser.value.toLowerCase();
-
-    const filtered = allUsers.filter(user =>
-      (user.username || "").toLowerCase().includes(query)
+    const filtered = allUsers.filter((user) =>
+      (user.username || "").toLowerCase().includes(queryText)
     );
 
     renderUsers(filtered);
-
   });
-
 }
