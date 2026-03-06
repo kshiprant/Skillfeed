@@ -1,55 +1,100 @@
-<section class="profile-page">
-
-  <!-- PROFILE VIEW -->
-  <div id="profile-view" class="profile-card">
-    <div class="profile-header">
-      <div class="profile-avatar">S</div>
-      <div class="profile-meta">
-        <h2 id="profile-name">Your Name</h2>
-        <p id="profile-location">Your Location</p>
-        <span id="profile-level" class="level-badge">Level 1 - Learner</span>
-      </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skillfeed | Profile</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="phone">
+    
+    <div class="topbar">
+      <div class="brand">Skillfeed</div>
+      <div class="sub">Your public profile.</div>
     </div>
 
-    <div class="profile-section">
-      <h3>Bio</h3>
-      <p id="profile-bio">Add a short bio to tell people what you do.</p>
+    <div class="nav">
+      <a href="index.html">Home</a>
+      <a href="ideas.html">Ideas</a>
+      <a href="find.html">Find People</a>
+      <a href="messages.html">Messages</a>
+      <a href="profile.html" class="active">Profile</a>
+      <button onclick="logout()">Logout</button>
     </div>
 
-    <div class="profile-section">
-      <h3>Skills</h3>
-      <div id="profile-skills" class="tags-wrap"></div>
+    <div class="main">
+      <div class="h1">Your Profile</div>
+
+      <section class="profile-page">
+
+        <!-- VIEW MODE -->
+        <div id="profile-view" class="profile-card">
+          <div class="profile-header">
+            <div class="profile-avatar" id="profile-avatar">S</div>
+
+            <div class="profile-meta">
+              <h2 id="profile-name">Your Name</h2>
+              <p id="profile-location">Your Location</p>
+              <span id="profile-level" class="level-badge">Level 1 - Learner</span>
+            </div>
+          </div>
+
+          <div class="profile-section">
+            <h3>Bio</h3>
+            <p id="profile-bio">Add a short bio to tell people what you do.</p>
+          </div>
+
+          <div class="profile-section">
+            <h3>Skills</h3>
+            <div id="profile-skills" class="tags-wrap">
+              <p class="empty-text">No skills added yet.</p>
+            </div>
+          </div>
+
+          <div class="profile-section">
+            <h3>Startup Interest</h3>
+            <p id="profile-interest">No startup interest added yet.</p>
+          </div>
+
+          <button id="edit-btn" class="btn">Edit Profile</button>
+        </div>
+
+        <!-- EDIT MODE -->
+        <div id="profile-edit" class="profile-card" style="display:none;">
+          <h2>Edit Profile</h2>
+
+          <input id="name" type="text" placeholder="Your Name" />
+          <input id="skills" type="text" placeholder="Your Skills (e.g. React, AI, Marketing)" />
+          <input id="location" type="text" placeholder="Location (City, Country)" />
+          <input id="interest" type="text" placeholder="Startup Interest (e.g. SaaS, AI, FinTech)" />
+          <textarea id="bio" placeholder="Short bio"></textarea>
+
+          <select id="level">
+            <option>Level 1 - Learner</option>
+            <option>Level 2 - Builder</option>
+            <option>Level 3 - Collaborator</option>
+            <option>Level 4 - Founder</option>
+          </select>
+
+          <div class="profile-actions">
+            <button id="cancel-btn" class="btn secondary">Cancel</button>
+            <button id="save-profile-btn" class="btn">Save Profile</button>
+          </div>
+        </div>
+
+      </section>
     </div>
 
-    <div class="profile-section">
-      <h3>Startup Interest</h3>
-      <p id="profile-interest">No startup interest added yet.</p>
-    </div>
-
-    <button id="edit-btn" class="primary-btn">Edit Profile</button>
+    <div class="footer">Developed by Kshiprant</div>
   </div>
 
-  <!-- PROFILE EDIT -->
-  <div id="profile-edit" class="profile-card" style="display: none;">
-    <h2>Edit Profile</h2>
-
-    <input id="name" type="text" placeholder="Your Name" />
-    <input id="skills" type="text" placeholder="Your Skills (e.g. React, AI, Marketing)" />
-    <input id="location" type="text" placeholder="Location (City, Country)" />
-    <input id="interest" type="text" placeholder="Startup Interest (e.g. SaaS, AI, FinTech)" />
-    <textarea id="bio" placeholder="Short bio"></textarea>
-
-    <select id="level">
-      <option>Level 1 - Learner</option>
-      <option>Level 2 - Builder</option>
-      <option>Level 3 - Collaborator</option>
-      <option>Level 4 - Founder</option>
-    </select>
-
-    <div class="profile-actions">
-      <button id="cancel-btn" class="secondary-btn">Cancel</button>
-      <button id="save-profile-btn" class="primary-btn">Save Profile</button>
-    </div>
-  </div>
-
-</section>
+  <script src="profile.js"></script>
+  <script>
+    function logout() {
+      localStorage.removeItem("skillfeed_logged_in");
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
