@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Skillfeed | Find People</title>
-
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -24,7 +23,6 @@
     <a class="active" href="/people.html">Find People</a>
     <a href="/messages.html">Messages</a>
     <a href="/profile.html">Profile</a>
-    <a href="/create-profile.html">Create Profile</a>
     <button type="button" onclick="logout()">Logout</button>
   </div>
 
@@ -33,6 +31,14 @@
     <div class="row">
       <div class="h1" style="margin:0;">People</div>
       <span class="badge" id="count">0</span>
+    </div>
+
+    <div class="card" style="margin-top:12px; margin-bottom:12px;">
+      <input
+        id="searchUser"
+        type="text"
+        placeholder="Search by username..."
+        style="width:100%; padding:12px; border-radius:10px; border:1px solid #ddd;">
     </div>
 
     <div class="status" id="status"></div>
