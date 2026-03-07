@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skillfeed | Chat</title>
+  <link rel="stylesheet" href="chat.css" />
+</head>
+<body>
+  <div class="phone">
+
+    <header class="chatHeader">
+      <div class="headerTop">
+        <button class="backBtn" onclick="goBack()">&#8592;</button>
+
+        <div class="userBlock">
+          <img src="https://i.pravatar.cc/100?img=22" alt="User" class="avatar" />
+          <div class="userMeta">
+            <h2>Riya Mehta</h2>
+            <p>UI/UX Designer • Active now</p>
+          </div>
+        </div>
+
+        <button class="profileBtn">View Profile</button>
+      </div>
+
+      <div class="contextTag">
+        Connected via: AI Resume Builder
+      </div>
+    </header>
+
+    <main class="chatBody" id="chatBody">
+      <div class="dateDivider">Today</div>
+
+      <div class="messageRow received">
+        <div class="messageBubble">
+          Hey, I liked your idea. It has real potential.
+          <span class="time">10:12 AM</span>
+        </div>
+      </div>
+
+      <div class="messageRow sent">
+        <div class="messageBubble">
+          Thanks. I was thinking the onboarding should feel very clean and modern.
+          <span class="time">10:13 AM</span>
+        </div>
+      </div>
+
+      <div class="messageRow received">
+        <div class="messageBubble">
+          Agreed. We should keep it minimal and collaboration-focused.
+          <span class="time">10:14 AM</span>
+        </div>
+      </div>
+
+      <div class="messageRow sent">
+        <div class="messageBubble">
+          Perfect. Let’s start with the user flow and wireframe.
+          <span class="time">10:15 AM</span>
+        </div>
+      </div>
+    </main>
+
+    <div class="chatInputWrap">
+      <div class="chatInputBar">
+        <button class="attachBtn" type="button">+</button>
+        <input
+          type="text"
+          id="messageInput"
+          placeholder="Message your collaborator..."
+          autocomplete="off"
+        />
+        <button class="sendBtn" id="sendBtn" type="button">&#10148;</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="chat.js"></script>
+</body>
+</html>
