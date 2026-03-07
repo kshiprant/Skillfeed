@@ -1,76 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Skillfeed | Connect</title>
-
-<link rel="stylesheet" href="messaging.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skillfeed | Connect</title>
+  <link rel="stylesheet" href="messaging.css" />
 </head>
-
 <body>
+  <div class="phone">
+    <header class="topbar">
+      <div class="logo">Skillfeed</div>
+      <div class="subtitle">Connect with collaborators</div>
+    </header>
 
-<div class="phone">
+    <div class="searchBox">
+      <input type="text" placeholder="Search conversations..." />
+    </div>
 
-<header class="topbar">
-<div class="logo">Skillfeed</div>
-<div class="subtitle">Connect with collaborators</div>
-</header>
+    <div class="chatList" id="chatList"></div>
 
-<div class="searchBox">
-<input type="text" placeholder="Search conversations...">
-</div>
+    <div class="emptyState" id="emptyState">
+      <div class="emptyIcon">💬</div>
+      <h2>No conversations yet</h2>
+      <p>You don’t have any connections or active chats right now.</p>
+      <button class="exploreBtn" onclick="window.location.href='/people.html'">
+        Explore People
+      </button>
+    </div>
 
-<div class="chatList">
+    <footer class="footer">
+      Developed by Kshiprant
+    </footer>
+  </div>
 
-<div class="chatCard unread">
-<img src="https://i.pravatar.cc/100?img=12">
-<div class="chatInfo">
-<h3>Aarav Sharma</h3>
-<p class="role">Frontend Developer</p>
-<p class="preview">Let’s discuss UI structure</p>
-</div>
-<div class="meta">
-<span>2m</span>
-<div class="dot"></div>
-</div>
-</div>
-
-<div class="chatCard">
-<img src="https://i.pravatar.cc/100?img=22">
-<div class="chatInfo">
-<h3>Riya Mehta</h3>
-<p class="role">UI/UX Designer</p>
-<p class="preview">Sounds interesting!</p>
-</div>
-<div class="meta">
-<span>1h</span>
-</div>
-</div>
-
-<div class="chatCard">
-<img src="https://i.pravatar.cc/100?img=35">
-<div class="chatInfo">
-<h3>Aditya Jain</h3>
-<p class="role">Backend Engineer</p>
-<p class="preview">Looking forward to building this</p>
-</div>
-<div class="meta">
-<span>Yesterday</span>
-</div>
-</div>
-
-</div>
-
-<footer class="footer">
-Developed by Kshiprant
-</footer>
-
-</div>
-
-<script src="connect.js"></script>
-
+  <script src="connect.js"></script>
 </body>
 </html>
