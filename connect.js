@@ -1,24 +1,42 @@
-// Get all chat cards
-const chats = document.querySelectorAll(".chatCard");
+const chatList = document.getElementById("chatList");
+const emptyState = document.getElementById("emptyState");
 
-// Loop through chats
-chats.forEach((chat, index) => {
+// Real for now: no connections, no chats
+const chats = [];
 
-  chat.addEventListener("click", () => {
+// Later this will come from Firebase
+function renderChats() {
+  if (!chats.length) {
+    chatList.style.display = "none";
+    emptyState.style.display = "flex";
+    return;
+  }
 
-    // Example chat data (later this will come from Firebase)
-    const chatData = {
-      id: index,
-      name: chat.querySelector("h3").innerText,
-      role: chat.querySelector(".role").innerText
-    };
+  emptyState.style.display = "none";
+  chatList.style.display = "block";
 
-    // Store chat data temporarily
-    sessionStorage.setItem("currentChat", JSON.stringify(chatData));
+  chatList.innerHTML = chats.map((chat, index) => `
+    <div class="chatCard" data-index="${index}">
+      <img src="${chat.image}" alt="${chat.name}">
+      <div class="chatInfo">
+        <h3>${chat.name}</h3>
+        <p class="role">${chat.role}</p>
+        <p class="preview">${chat.preview}</p>
+      </div>
+      <div class="meta">
+        <span>${chat.time}</span>
+        ${chat.unread ? '<div class="dot"></div>' : ''}
+      </div>
+    </div>
+  `).join("");
 
-    // Open chat page
-    window.location.href = "chat.html";
-
+  document.querySelectorAll(".chatCard").forEach(card => {
+    card.addEventListener("click", () => {
+      const index = card.dataset.index;
+      sessionStorage.setItem("currentChat", JSON.stringify(chats[index]));
+      window.location.href = "chat.html";
+    });
   });
+}
 
-});
+renderChats();
