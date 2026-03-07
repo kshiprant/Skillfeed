@@ -1,115 +1,73 @@
-:root{
-  --bg:#F4F6FB;
-  --card:#ffffff;
-  --text:#0F172A;
-  --muted:#475569;
-  --line:#E2E8F0;
-  --brand:#2563EB;
-  --brand2:#0EA5E9;
-  --shadow:0 10px 30px rgba(0,0,0,0.08);
-}
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-}
-
-body{
-  background:var(--bg);
-  display:flex;
-  justify-content:center;
-  padding:20px;
-}
-
-.phone{
-  width:100%;
-  max-width:420px;
-  min-height:80vh;
-  background:#fff;
-  border-radius:22px;
-  box-shadow:var(--shadow);
-  overflow:hidden;
+.messages-main{
   display:flex;
   flex-direction:column;
+  gap:18px;
+  padding-bottom:110px;
 }
 
-.topbar{
-  padding:22px 20px;
-  border-bottom:1px solid var(--line);
+.messages-search-wrap{
+  background:#fff;
+  border:1px solid #e2e8f0;
+  border-radius:22px;
+  padding:18px;
+  box-shadow:0 8px 24px rgba(15,23,42,.05);
 }
 
-.logo{
-  font-size:22px;
-  font-weight:800;
-  color:var(--brand);
-}
-
-.subtitle{
-  margin-top:6px;
-  color:var(--muted);
-  font-size:14px;
-}
-
-.searchBox{
-  padding:16px;
-  border-bottom:1px solid var(--line);
-}
-
-.searchBox input{
+.messages-search-wrap input{
   width:100%;
-  padding:14px 16px;
-  border:1px solid var(--line);
+  border:1px solid #e2e8f0;
   border-radius:18px;
-  outline:none;
+  padding:14px 16px;
   font-size:15px;
+  outline:none;
+  background:#fff;
 }
 
-.chatList{
-  padding:10px 12px;
+.chat-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
 }
 
 .chatCard{
   display:flex;
   align-items:center;
   gap:12px;
-  padding:12px;
-  border-radius:16px;
+  padding:14px;
+  border-radius:20px;
+  background:#fff;
+  border:1px solid #e2e8f0;
+  box-shadow:0 8px 24px rgba(15,23,42,.05);
   cursor:pointer;
-  transition:.2s ease;
-}
-
-.chatCard:hover{
-  background:#F8FAFC;
 }
 
 .chatCard img{
-  width:52px;
-  height:52px;
+  width:54px;
+  height:54px;
   border-radius:50%;
   object-fit:cover;
 }
 
 .chatInfo{
   flex:1;
+  min-width:0;
 }
 
 .chatInfo h3{
-  font-size:15px;
-  color:var(--text);
+  font-size:16px;
+  color:#0f172a;
+  margin-bottom:2px;
 }
 
 .role{
-  font-size:12px;
-  color:var(--muted);
-  margin-top:2px;
+  font-size:13px;
+  color:#475569;
 }
 
 .preview{
   font-size:13px;
   color:#64748b;
-  margin-top:2px;
+  margin-top:3px;
 }
 
 .meta{
@@ -121,20 +79,19 @@ body{
 .dot{
   width:8px;
   height:8px;
-  background:var(--brand);
+  background:#2563eb;
   border-radius:50%;
   margin-top:5px;
   margin-left:auto;
 }
 
 .emptyState{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+  background:#fff;
+  border:1px solid #e2e8f0;
+  border-radius:24px;
+  box-shadow:0 8px 24px rgba(15,23,42,.05);
+  padding:42px 24px;
   text-align:center;
-  padding:32px 24px;
 }
 
 .emptyIcon{
@@ -144,33 +101,26 @@ body{
 
 .emptyState h2{
   font-size:22px;
-  color:var(--text);
+  color:#0f172a;
   margin-bottom:10px;
 }
 
 .emptyState p{
-  font-size:14px;
-  color:var(--muted);
+  color:#475569;
+  font-size:15px;
   line-height:1.6;
   max-width:280px;
+  margin:0 auto;
 }
 
 .exploreBtn{
   margin-top:18px;
   border:none;
-  background:linear-gradient(135deg,var(--brand),var(--brand2));
+  background:linear-gradient(135deg,#2563eb,#0ea5e9);
   color:#fff;
   padding:12px 20px;
   border-radius:14px;
   font-size:14px;
   font-weight:600;
   cursor:pointer;
-}
-
-.footer{
-  text-align:center;
-  font-size:12px;
-  color:#94a3b8;
-  padding:16px;
-  border-top:1px solid var(--line);
 }
