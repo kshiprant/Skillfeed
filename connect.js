@@ -1,19 +1,17 @@
 const chatList = document.getElementById("chatList");
 const emptyState = document.getElementById("emptyState");
 
-// Real for now: no connections, no chats
 const chats = [];
 
-// Later this will come from Firebase
 function renderChats() {
   if (!chats.length) {
     chatList.style.display = "none";
-    emptyState.style.display = "flex";
+    emptyState.style.display = "block";
     return;
   }
 
   emptyState.style.display = "none";
-  chatList.style.display = "block";
+  chatList.style.display = "flex";
 
   chatList.innerHTML = chats.map((chat, index) => `
     <div class="chatCard" data-index="${index}">
@@ -34,7 +32,7 @@ function renderChats() {
     card.addEventListener("click", () => {
       const index = card.dataset.index;
       sessionStorage.setItem("currentChat", JSON.stringify(chats[index]));
-      window.location.href = "chat.html";
+      window.location.href = "/chat.html";
     });
   });
 }
