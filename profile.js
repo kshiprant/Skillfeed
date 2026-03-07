@@ -1,7 +1,14 @@
+import { auth, db } from "./firebase.js";
+import {
+  doc,
+  getDoc,
+  setDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const profileView = document.getElementById("profile-view");
   const profileEdit = document.getElementById("profile-edit");
-
   const editBtn = document.getElementById("edit-btn");
   const cancelBtn = document.getElementById("cancel-btn");
   const saveBtn = document.getElementById("save-profile-btn");
@@ -21,21 +28,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const profileInterest = document.getElementById("profile-interest");
   const profileAvatar = document.getElementById("profile-avatar");
 
-  function getProfileData() {
-    return JSON.parse(localStorage.getItem("skillfeed_profile") || "{}");
-  }
-
-  function saveProfileData(data) {
-    localStorage.setItem("skillfeed_profile", JSON.stringify(data));
-
-    localStorage.setItem("skillfeed_email", data.username ? `${data.username}@skillfeed.com` : "localuser@skillfeed.com");
-    localStorage.setItem("skillfeed_uid", data.username || "local-user");
-
-    const users = JSON.parse(localStorage.getItem("skillfeed_users") || "[]");
-    const filtered = users.filter(u => u.username !== data.username);
-    filtered.push(data);
-    localStorage.setItem("skillfeed_users", JSON.stringify(filtered));
-  }
+  let currentUser = null;
+  let currentProfile = {
+    name: "",
+    skills: "",
+    location: "",
+    interest: "",
+    bio: "",
+    level: "Level 1 - Learner"
+  };
 
   function createTag(text) {
     const span = document.createElement("span");
@@ -44,9 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return span;
   }
 
-  function renderProfile() {
-    const data = getProfileData();
-
+  function renderProfile(data) {
     profileName.textContent = data.name || "Your Name";
     profileLocation.textContent = data.location || "Your Location";
     profileLevel.textContent = data.level || "Level 1 - Learner";
@@ -57,11 +56,9 @@ document.addEventListener("DOMContentLoaded", () => {
     profileAvatar.textContent = firstLetter || "S";
 
     profileSkills.innerHTML = "";
-    if ((data.skills || "").trim()) {
+    if (data.skills && data.skills.trim()) {
       data.skills.split(",").forEach(skill => {
-        if (skill.trim()) {
-          profileSkills.appendChild(createTag(skill));
-        }
+        if (skill.trim()) profileSkills.appendChild(createTag(skill));
       });
     } else {
       profileSkills.innerHTML = `<p class="empty-text">No skills added yet.</p>`;
@@ -85,36 +82,83 @@ document.addEventListener("DOMContentLoaded", () => {
     profileEdit.style.display = "none";
   }
 
-  if (editBtn) editBtn.addEventListener("click", showEditMode);
+  async function loadProfile(uid) {
+    const ref = doc(db, "users", uid);
+    const snap = await getDoc(ref);
 
-  if (cancelBtn) {
-    cancelBtn.addEventListener("click", () => {
-      renderProfile();
-      showViewMode();
-    });
+    if (snap.exists()) {
+      currentProfile = {
+        name: snap.data().name || "",
+        skills: snap.data().skills || "",
+        location: snap.data().location || "",
+        interest: snap.data().startup || snap.data().interest || "",
+        bio: snap.data().bio || "",
+        level: snap.data().level || "Level 1 - Learner"
+      };
+    }
+
+    renderProfile(currentProfile);
+    showViewMode();
   }
 
-  if (saveBtn) {
-    saveBtn.addEventListener("click", () => {
-      const usernameBase = (nameInput.value.trim() || "user").toLowerCase().replace(/\s+/g, "");
+  editBtn.addEventListener("click", showEditMode);
 
-      const data = {
-        name: nameInput.value.trim(),
-        username: usernameBase,
-        skills: skillsInput.value.trim(),
-        location: locationInput.value.trim(),
-        interest: interestInput.value.trim(),
-        startup: interestInput.value.trim(),
-        bio: bioInput.value.trim(),
-        level: levelInput.value
+  cancelBtn.addEventListener("click", () => {
+    renderProfile(currentProfile);
+    showViewMode();
+  });
+
+  saveBtn.addEventListener("click", async () => {
+    if (!currentUser) {
+      alert("Please login first.");
+      window.location.href = "/index.html";
+      return;
+    }
+
+    const data = {
+      uid: currentUser.uid,
+      email: currentUser.email || "",
+      name: nameInput.value.trim(),
+      skills: skillsInput.value.trim(),
+      location: locationInput.value.trim(),
+      startup: interestInput.value.trim(),
+      bio: bioInput.value.trim(),
+      level: levelInput.value,
+      updatedAt: Date.now()
+    };
+
+    try {
+      await setDoc(doc(db, "users", currentUser.uid), data, { merge: true });
+
+      currentProfile = {
+        name: data.name,
+        skills: data.skills,
+        location: data.location,
+        interest: data.startup,
+        bio: data.bio,
+        level: data.level
       };
 
-      saveProfileData(data);
-      renderProfile();
+      renderProfile(currentProfile);
       showViewMode();
-    });
-  }
+      alert("Profile saved successfully.");
+    } catch (err) {
+      console.error(err);
+      alert("Failed to save profile.");
+    }
+  });
 
-  renderProfile();
-  showViewMode();
+  window.logout = async function () {
+    await signOut(auth);
+    window.location.href = "/index.html";
+  };
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      window.location.href = "/index.html";
+      return;
+    }
+    currentUser = user;
+    await loadProfile(user.uid);
+  });
 });
